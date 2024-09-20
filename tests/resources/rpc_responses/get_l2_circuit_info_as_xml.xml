@@ -1,0 +1,18 @@
+<l2circuit-connection-information>
+    <l2circuit-neighbor>
+        <neighbor-address>10.10.10.10</neighbor-address>
+        <connection heading="Interface                 Type  St     Time last up          # Up trans">
+            <connection-id>lt-1/2/0.2323(vc 200)</connection-id>
+            <connection-type>rmt</connection-type>
+            <connection-status>Up</connection-status>
+        </connection>
+    </l2circuit-neighbor>
+    <l2circuit-neighbor>
+        <neighbor-address>11.11.11.11</neighbor-address>
+        <connection heading="Interface                 Type  St     Time last up          # Up trans">
+            <connection-id>lt-1/2/0.3(vc 100)</connection-id>
+            <connection-type>rmt</connection-type>
+            <connection-status>Up</connection-status>
+        </connection>
+    </l2circuit-neighbor>
+</l2circuit-connection-information>

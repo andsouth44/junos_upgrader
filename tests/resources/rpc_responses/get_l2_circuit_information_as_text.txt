@@ -1,0 +1,25 @@
+Layer-2 Circuit Connections:
+
+Legend for connection status (St)
+EI -- encapsulation invalid      NP -- interface h/w not present
+MM -- mtu mismatch               Dn -- down
+EM -- encapsulation mismatch     VC-Dn -- Virtual circuit Down
+CM -- control-word mismatch      Up -- operational
+VM -- vlan id mismatch           CF -- Call admission control failure
+OL -- no outgoing label          IB -- TDM incompatible bitrate
+NC -- intf encaps not CCC/TCC    TM -- TDM misconfiguration
+BK -- Backup Connection          ST -- Standby Connection
+CB -- rcvd cell-bundle size bad  SP -- Static Pseudowire
+LD -- local site signaled down   RS -- remote site standby
+RD -- remote site signaled down  HS -- Hot-standby Connection
+XX -- unknown
+
+Legend for interface status
+Up -- operational
+Dn -- down
+Neighbor: 10.10.10.10
+    Interface                 Type  St     Time last up          # Up trans
+    lt-1/2/0.2323(vc 200)    rmt   OL
+Neighbor: 11.11.11.11
+    Interface                 Type  St     Time last up          # Up trans
+    lt-1/2/0.3(vc 100)        rmt   OL

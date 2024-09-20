@@ -1,0 +1,238 @@
+<output>
+{
+    "route-summary-information" : [
+    {
+        "attributes" : {"xmlns" : "http://xml.juniper.net/junos/22.4R0/junos-routing"},
+        "as-number" : [
+        {
+            "data" : "64577"
+        }
+        ],
+        "router-id" : [
+        {
+            "data" : "10.10.10.10"
+        }
+        ],
+        "maximum-ecmp" : [
+        {
+            "data" : "16"
+        }
+        ],
+        "routing-highwatermark" : [
+        {
+            "rt-uniq-highwatermark" : [
+            {
+                "data" : "1166180"
+            }
+            ],
+            "rt-uniq-highwatermark-ts" : [
+            {
+                "data" : "2024-09-10 14:57:20"
+            }
+            ],
+            "rt-uniq-tavg-watermark" : [
+            {
+                "data" : "1163231"
+            }
+            ],
+            "rt-all-highwatermark" : [
+            {
+                "data" : "2321061"
+            }
+            ],
+            "rt-all-highwatermark-ts" : [
+            {
+                "data" : "2024-09-10 14:57:02"
+            }
+            ],
+            "rt-all-tavg-watermark" : [
+            {
+                "data" : "2315187"
+            }
+            ],
+            "rt-fib-highwatermark" : [
+            {
+                "data" : "221597"
+            }
+            ],
+            "rt-fib-highwatermark-ts" : [
+            {
+                "data" : "2024-09-10 12:36:39"
+            }
+            ],
+            "rt-fib-tavg-watermark" : [
+            {
+                "data" : "221437"
+            }
+            ],
+            "rt-vrf-highwatermark" : [
+            {
+                "data" : "5"
+            }
+            ],
+            "rt-vrf-highwatermark-ts" : [
+            {
+                "data" : "2024-09-04 15:45:00"
+            }
+            ]
+        }
+        ],
+        "route-table" : [
+        {
+            "table-name" : [
+            {
+                "data" : "inet.0"
+            }
+            ],
+            "destination-count" : [
+            {
+                "data" : "948967"
+            }
+            ],
+            "total-route-count" : [
+            {
+                "data" : "1891246"
+            }
+            ],
+            "active-route-count" : [
+            {
+                "data" : "219824"
+            }
+            ],
+            "holddown-route-count" : [
+            {
+                "data" : "0"
+            }
+            ],
+            "hidden-route-count" : [
+            {
+                "data" : "1455644"
+            }
+            ],
+            "protocols" : [
+            {
+                "protocol-name" : [
+                {
+                    "data" : "Direct"
+                }
+                ],
+                "protocol-route-count" : [
+                {
+                    "data" : "142"
+                }
+                ],
+                "active-route-count" : [
+                {
+                    "data" : "142"
+                }
+                ]
+            },
+            {
+                "protocol-name" : [
+                {
+                    "data" : "Local"
+                }
+                ],
+                "protocol-route-count" : [
+                {
+                    "data" : "5"
+                }
+                ],
+                "active-route-count" : [
+                {
+                    "data" : "5"
+                }
+                ]
+            },
+            {
+                "protocol-name" : [
+                {
+                    "data" : "BGP"
+                }
+                ],
+                "protocol-route-count" : [
+                {
+                    "data" : "1889532"
+                }
+                ],
+                "active-route-count" : [
+                {
+                    "data" : "218110"
+                }
+                ]
+            },
+            {
+                "protocol-name" : [
+                {
+                    "data" : "Static"
+                }
+                ],
+                "protocol-route-count" : [
+                {
+                    "data" : "135"
+                }
+                ],
+                "active-route-count" : [
+                {
+                    "data" : "135"
+                }
+                ]
+            },
+            {
+                "protocol-name" : [
+                {
+                    "data" : "IS-IS"
+                }
+                ],
+                "protocol-route-count" : [
+                {
+                    "data" : "1426"
+                }
+                ],
+                "active-route-count" : [
+                {
+                    "data" : "1426"
+                }
+                ]
+            },
+            {
+                "protocol-name" : [
+                {
+                    "data" : "LDP"
+                }
+                ],
+                "protocol-route-count" : [
+                {
+                    "data" : "1"
+                }
+                ],
+                "active-route-count" : [
+                {
+                    "data" : "1"
+                }
+                ]
+            },
+            {
+                "protocol-name" : [
+                {
+                    "data" : "Access-internal"
+                }
+                ],
+                "protocol-route-count" : [
+                {
+                    "data" : "5"
+                }
+                ],
+                "active-route-count" : [
+                {
+                    "data" : "5"
+                }
+                ]
+            }
+            ]
+        }
+        ]
+    }
+    ]
+}
+</output>

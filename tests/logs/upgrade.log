@@ -1,0 +1,187 @@
+Dryrun mode is disabled.
+Force mode is disabled.
+********** RUNNING RE0 PRE-CHECKS **********
+Trying to connect to 10.10.10.11. Attempt 1 of 20.
+Connected to 10.10.10.11 ✅
+Verify no alarms on chassis
+No alarms on chassis. ✅
+Verifying RE0 is master
+Checking if RE0 is master. Attempt 1 of 20
+RE0 is master. ✅
+Verify status of RE0
+RE0 status is OK. ✅
+Verify RE0 memory utilization
+RE0 memory utilization is 5%. ✅
+Verify RE0 CPU idle
+RE0 CPU idle percentage is 99%. ✅
+Verify protocol replication
+All protocol replication state is complete and either (or both) OSPF or ISIS are present. ✅
+Verify PIC status
+All PICs are online. ✅
+Verify running Junos version on RE0
+RE0 is running the expected Junos version 19.4R3-S4.1 ✅
+Verify model version of RE0
+RE0 model version is RE-S-1600x8. ✅
+Verify proposed Junos install package exists on RE0
+RE0 has the new Junos package: junos-vmhost-install-mx-x86-64-22.4R3.25.tgz in /var/tmp/. ✅
+Verify number of disks on RE0
+RE has 2 disks. ✅
+Verify number of 'Up' ISIS adjacencies
+RE0 has 2 ISIS 'Up' adjacencies. ✅
+Copying file from re0:/config/juniper.conf.1.gz to re0:/var/tmp/PreUpgrade.conf.gz
+File copied from re0:/config/juniper.conf.1.gz to re0:/var/tmp/PreUpgrade.conf.gz. ✅
+Copying file from re1:/config/juniper.conf.1.gz to re1:/var/tmp/PreUpgrade.conf.gz
+File copied from re1:/config/juniper.conf.1.gz to re1:/var/tmp/PreUpgrade.conf.gz. ✅
+Recording chassis hardware
+Chassis hardware recorded. ✅
+Record subscriber count for each subscriber type
+Subscriber type count recorded. ✅
+Recording ISIS adjacency info
+ISIS adjacency info recorded. ✅
+Recording BGP summary info
+BGP summary info recorded. ✅
+Recording interface state info
+Interface state info recorded. ✅
+Recording LDP session state
+LDP session info saved. ✅
+Recording protocol replication state
+Protocol replication state recorded. ✅
+Recording bfd session info
+BFD session info recorded. ✅
+Recording PIC info
+PIC info recorded. ✅
+Recording chassis alarms
+Chassis alarms recorded. ✅
+Recording L2 circuit info
+L2 circuit info recorded. ✅
+Recording route summary
+Route summary recorded. ✅
+********** RUNNING RE1 PRE-CHECKS **********
+Trying to connect to 10.10.10.12. Attempt 1 of 20.
+Connected to 10.10.10.12 ✅
+Verify status of RE1
+RE1 status is OK. ✅
+Verify RE1 memory utilization
+RE1 memory utilization is 5%. ✅
+Verify RE1 CPU idle
+RE1 CPU idle percentage is 99%. ✅
+Verify running Junos version on RE1
+RE1 is running the expected Junos version 19.4R3-S4.1 ✅
+Verify model version of RE1
+RE1 model version is RE-S-1600x8. ✅
+Verify proposed Junos install package exists on RE1
+RE1 has the new Junos package: junos-vmhost-install-mx-x86-64-22.4R3.25.tgz in /var/tmp/. ✅
+Verify number of disks on RE0
+RE has 2 disks. ✅
+********** PRE-CHECKS COMPLETE **********
+********** CONTINUING WITH UPGRADE **********
+********** UPGRADING RE1 **********
+Applying commands to deactivate redundancy features
+Loading and committing config inputs/deactivate_redundancy.txt
+Config loaded and committed successfully. ✅
+Creating rescue config
+Rescue config created successfully. ✅
+Installing junos-vmhost-install-mx-x86-64-22.4R3.25.tgz. This may take up to 10 minutes.
+New package: junos-vmhost-install-mx-x86-64-22.4R3.25.tgz installed. ✅
+Initiating reboot of RE1.
+RE1 rebooted. It may take up to 10 minutes for the RE to come back online. ✅
+RE1 rebooting, waiting 360 seconds before trying to reconnect
+Trying to connect to 10.10.10.12. Attempt 1 of 20.
+Connected to 10.10.10.12 ✅
+Installing junos-vmhost-install-mx-x86-64-22.4R3.25.tgz. This may take up to 10 minutes.
+New package: junos-vmhost-install-mx-x86-64-22.4R3.25.tgz installed. ✅
+Initiating reboot of RE1.
+RE1 rebooted. It may take up to 10 minutes for the RE to come back online. ✅
+RE1 rebooting, waiting 360 seconds before trying to reconnect
+Trying to connect to 10.10.10.12. Attempt 1 of 20.
+Connected to 10.10.10.12 ✅
+Checking that image: junos-install-mx-x86-64-22.4R3.25 exists on both partitions
+Junos image junos-install-mx-x86-64-22.4R3.25 exists on both partitions. ✅
+Validating junos-vmhost-install-mx-x86-64-22.4R3.25.tgz. This may take several minutes.
+Validation successful. ✅
+Verify running Junos version on RE1
+RE1 is running the expected Junos version 22.4R3.25 ✅
+Initiating switchover to RE1 as master
+RE switchover initiated. ✅
+Waiting 180 seconds for switchover to complete
+Verifying RE1 is master
+Checking if RE1 is master. Attempt 1 of 20
+RE1 is master. ✅
+********** UPGRADING RE0 **********
+Creating rescue config
+Rescue config created successfully. ✅
+Installing junos-vmhost-install-mx-x86-64-22.4R3.25.tgz. This may take up to 10 minutes.
+New package: junos-vmhost-install-mx-x86-64-22.4R3.25.tgz installed. ✅
+Initiating reboot of RE0.
+RE0 rebooted. It may take up to 10 minutes for the RE to come back online. ✅
+RE0 rebooting, waiting 360 seconds before trying to reconnect
+Trying to connect to 10.10.10.11. Attempt 1 of 20.
+Connected to 10.10.10.11 ✅
+Installing junos-vmhost-install-mx-x86-64-22.4R3.25.tgz. This may take up to 10 minutes.
+New package: junos-vmhost-install-mx-x86-64-22.4R3.25.tgz installed. ✅
+Initiating reboot of RE0.
+RE0 rebooted. It may take up to 10 minutes for the RE to come back online. ✅
+RE0 rebooting, waiting 360 seconds before trying to reconnect
+Trying to connect to 10.10.10.11. Attempt 1 of 20.
+Connected to 10.10.10.11 ✅
+Checking that image: junos-install-mx-x86-64-22.4R3.25 exists on both partitions
+Junos image junos-install-mx-x86-64-22.4R3.25 exists on both partitions. ✅
+Validating junos-vmhost-install-mx-x86-64-22.4R3.25.tgz. This may take several minutes.
+Validation successful. ✅
+Verify running Junos version on RE0
+RE0 is running the expected Junos version 22.4R3.25 ✅
+Initiating switchover to RE0 as master
+RE switchover initiated. ✅
+Waiting 180 seconds for switchover to complete
+Verifying RE0 is master
+Checking if RE0 is master. Attempt 1 of 20
+RE0 is master. ✅
+Waiting 120 seconds for convergence after switchover
+Applying commands to activate redundancy features
+Loading and committing config inputs/activate_redundancy.txt
+Config loaded and committed successfully. ✅
+Checking protocol replication. Attempt 1 of 20
+Verify protocol replication
+All protocol replication state is complete and either (or both) OSPF or ISIS are present. ✅
+Waiting 120 seconds for routing convergence
+********** RUNNING POST UPGRADE CHECKS AND GATHERING STATE DATA **********
+Verify no alarms on chassis
+No alarms on chassis. ✅
+Verify number of 'Up' ISIS adjacencies
+RE0 has 2 ISIS 'Up' adjacencies. ✅
+Recording chassis hardware
+Chassis hardware recorded. ✅
+Record subscriber count for each subscriber type
+Subscriber type count recorded. ✅
+Recording ISIS adjacency info
+ISIS adjacency info recorded. ✅
+Recording BGP summary info
+BGP summary info recorded. ✅
+Recording interface state info
+Interface state info recorded. ✅
+Recording LDP session state
+LDP session info saved. ✅
+Recording protocol replication state
+Protocol replication state recorded. ✅
+Recording bfd session info
+BFD session info recorded. ✅
+Recording PIC info
+PIC info recorded. ✅
+Recording chassis alarms
+Chassis alarms recorded. ✅
+Recording L2 circuit info
+L2 circuit info recorded. ✅
+Recording route summary
+Route summary recorded. ✅
+********** UPGRADE COMPLETE **********
+********** COMPARING PRE & POST CONFIG **********
+⚠️ WARNING: There are the following differences between the pre and post configs:
+-set interfaces xe-1/0/5:2 unit 10 family inet address 1.1.1.1/30
++set interfaces xe-1/0/5:2 unit 10 family inet address 1.1.1.2/30
+-set interfaces xe-1/0/5:2 unit 40 vlan-id 40
++set interfaces xe-1/0/5:2 unit 40 vlan-id 41
+********** COMPARING PRE & POST STATE **********
+⚠️ WARNING: There are the following differences between pre and post state:
+Parameter subscriber-count-per-type.pppoe: has values: before 5, after 4
+Parameter subscriber-count-per-type.vlan: has values: before 10, after 9
+Enjoy your favorite beverage! 😀

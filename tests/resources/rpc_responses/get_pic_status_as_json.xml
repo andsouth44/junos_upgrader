@@ -1,0 +1,66 @@
+<output>
+{
+    "fpc-information" : [
+    {
+        "attributes" : {"xmlns" : "http://xml.juniper.net/junos/22.4R0/junos-chassis",
+                        "junos:style" : "pic-style"
+                       },
+        "fpc" : [
+        {
+            "slot" : [
+            {
+                "data" : "1"
+            }
+            ],
+            "state" : [
+            {
+                "data" : "Online"
+            }
+            ],
+            "description" : [
+            {
+                "data" : "LC2103"
+            }
+            ],
+            "pic" : [
+            {
+                "pic-slot" : [
+                {
+                    "data" : "0"
+                }
+                ],
+                "pic-state" : [
+                {
+                    "data" : "Online"
+                }
+                ],
+                "pic-type" : [
+                {
+                    "data" : "6xQSFPP"
+                }
+                ]
+            },
+            {
+                "pic-slot" : [
+                {
+                    "data" : "1"
+                }
+                ],
+                "pic-state" : [
+                {
+                    "data" : "Online"
+                }
+                ],
+                "pic-type" : [
+                {
+                    "data" : "MIC1"
+                }
+                ]
+            }
+            ]
+        }
+        ]
+    }
+    ]
+}
+</output>

@@ -1,0 +1,27 @@
+<output>
+Hardware inventory:
+Item             Version  Part number  Serial number     Description
+Chassis                                667788834JCB      JNP10003 [MX10003]
+Midplane         REV 23   750-074276   B1234567          Midplane 2
+Routing Engine 0          BUILTIN      BUILTIN           RE-S-1600x8
+Routing Engine 1          BUILTIN      BUILTIN           RE-S-1600x8
+CB 0             REV 38   750-067071   C2223344          Control Board
+  Mezz           REV 16   711-066896   C7778888          Control Mezz Board
+CB 1             REV 38   750-067071   C2222333          Control Board
+  Mezz           REV 16   711-066896   C5555555          Control Mezz Board
+FPC 1            REV 28   750-066879   C3333333          LC2103
+  CPU                     BUILTIN      BUILTIN           SMPC PMB
+  PIC 0                   BUILTIN      BUILTIN           6xQSFPP
+  PIC 1          REV 27   750-068806   C4444444          MIC1
+    Xcvr 0       REV 01   740-058732   6669999666        QSFP-100GBASE-LR4
+    Xcvr 4       REV 01   740-058732   7777888999        QSFP-100GBASE-LR4
+    Xcvr 10      REV 01   740-058732   6666677777        QSFP-100GBASE-LR4
+PEM 0            REV 04   740-066938   11111111111       JNP-PWR1100-DC
+PEM 1            REV 04   740-066938   22222222222       JNP-PWR1100-DC
+PEM 2            REV 04   740-066938   33333333333       JNP-PWR1100-DC
+PEM 3            REV 04   740-066938   44444444444       JNP-PWR1100-DC
+Fan Tray 0       REV 13   760-069329   C5555555          JNP FAN 3RU
+Fan Tray 1       REV 13   760-069329   C6666666          JNP FAN 3RU
+Fan Tray 2       REV 13   760-069329   C7777777          JNP FAN 3RU
+Fan Tray 3       REV 13   760-069329   C4444888          JNP FAN 3RU
+</output>

@@ -1,0 +1,7 @@
+activate chassis redundancy graceful-switchover
+activate routing-options nonstop-routing
+activate routing-options nsr-phantom-holdtime
+activate system switchover-on-routing-crash
+activate system commit synchronize
+activate system commit fast-synchronize
+set chassis fpc 1 error major action reset-pfe

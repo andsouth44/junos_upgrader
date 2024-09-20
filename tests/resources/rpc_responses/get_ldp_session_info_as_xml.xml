@@ -1,0 +1,16 @@
+    <ldp-session-information>
+        <ldp-session>
+            <ldp-neighbor-address>10.10.10.10</ldp-neighbor-address>
+            <ldp-session-state>Operational</ldp-session-state>
+            <ldp-connection-state>Open</ldp-connection-state>
+            <ldp-remaining-time>24</ldp-remaining-time>
+            <ldp-session-adv-mode>DU</ldp-session-adv-mode>
+        </ldp-session>
+        <ldp-session>
+            <ldp-neighbor-address>11.11.11.11</ldp-neighbor-address>
+            <ldp-session-state>Operational</ldp-session-state>
+            <ldp-connection-state>Open</ldp-connection-state>
+            <ldp-remaining-time>24</ldp-remaining-time>
+            <ldp-session-adv-mode>DU</ldp-session-adv-mode>
+        </ldp-session>
+    </ldp-session-information>

@@ -1,0 +1,88 @@
+<output>
+{
+    "task-replication-state" : [
+    {
+        "task-gres-state" : [
+        {
+            "data" : "Enabled"
+        }
+        ],
+        "task-re-mode" : [
+        {
+            "data" : "Master"
+        }
+        ],
+        "task-protocol-replication-name" : [
+        {
+            "data" : "OSPF"
+        }
+        ],
+        "task-protocol-replication-state" : [
+        {
+            "data" : "Complete"
+        }
+        ],
+        "task-protocol-replication-name" : [
+        {
+            "data" : "BGP"
+        }
+        ],
+        "task-protocol-replication-state" : [
+        {
+            "data" : "Complete"
+        }
+        ],
+        "task-protocol-replication-name" : [
+        {
+            "data" : "IS-IS"
+        }
+        ],
+        "task-protocol-replication-state" : [
+        {
+            "data" : "Complete"
+        }
+        ],
+        "task-protocol-replication-name" : [
+        {
+            "data" : "MPLS"
+        }
+        ],
+        "task-protocol-replication-state" : [
+        {
+            "data" : "Complete"
+        }
+        ],
+        "task-protocol-replication-name" : [
+        {
+            "data" : "RSVP"
+        }
+        ],
+        "task-protocol-replication-state" : [
+        {
+            "data" : "Complete"
+        }
+        ],
+        "task-protocol-replication-name" : [
+        {
+            "data" : "LDP"
+        }
+        ],
+        "task-protocol-replication-state" : [
+        {
+            "data" : "Complete"
+        }
+        ],
+        "task-protocol-replication-name" : [
+        {
+            "data" : "EVPN"
+        }
+        ],
+        "task-protocol-replication-state" : [
+        {
+            "data" : "Complete"
+        }
+        ]
+    }
+    ]
+}
+</output>

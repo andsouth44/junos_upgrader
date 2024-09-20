@@ -1,0 +1,12 @@
+<directory-list>
+    <directory name="/var/tmp">
+        <directory-name>/var/tmp</directory-name>
+        <total-file-blocks>15222345</total-file-blocks>
+        <file-information>
+            <file-name>junos-vmhost-install-mx-x86-64-19.4R3-S4.1.tgz</file-name>
+        </file-information>
+        <file-information>
+            <file-name>junos-vmhost-install-mx-x86-64-22.4R3.25.tgz</file-name>
+        </file-information>
+    </directory>
+</directory-list>

@@ -1,0 +1,14 @@
+﻿<alarm-information>
+    <alarm-summary>
+        <active-alarm-count>1</active-alarm-count>
+    </alarm-summary>
+    <alarm-detail>
+        <alarm-time>
+            2024-08-21 10:18:30 EDT
+        </alarm-time>
+        <alarm-class>Minor</alarm-class>
+        <alarm-description>VMHost 1 Boot from alternate disk</alarm-description>
+        <alarm-short-description>VMHost 1 boot: alt disk</alarm-short-description>
+        <alarm-type>Chassis</alarm-type>
+    </alarm-detail>
+</alarm-information>

@@ -1,0 +1,13 @@
+<output>
+        Stateful Replication: Enabled
+        RE mode: Master
+
+    Protocol                Synchronization Status
+    OSPF                    Complete
+    BGP                     Complete
+    IS-IS                   Complete
+    MPLS                    Complete
+    RSVP                    Complete
+    LDP                     Complete
+    EVPN                    Complete
+</output>

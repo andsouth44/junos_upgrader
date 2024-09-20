@@ -1,0 +1,12 @@
+<bgp-information>
+    <bgp-peer>
+        <peer-state>Established</peer-state>
+        <peer-address>11.11.11.11</peer-address>
+        <peer-group>group1</peer-group>
+    </bgp-peer>
+    <bgp-peer>
+        <peer-state>Established</peer-state>
+        <peer-address>12.12.12.12</peer-address>
+        <peer-group>group2</peer-group>
+    </bgp-peer>
+</bgp-information>

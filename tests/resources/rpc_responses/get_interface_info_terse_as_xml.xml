@@ -1,0 +1,32 @@
+<interface-information>
+    <physical-interface>
+        <name>xe-1/0/5:1</name>
+        <admin-status>up</admin-status>
+        <oper-status>up</oper-status>
+            <logical-interface>
+                <name>xe-1/0/5:1.100</name>
+                <admin-status>up</admin-status>
+                <oper-status>up</oper-status>
+            </logical-interface>
+            <logical-interface>
+                <name>xe-1/0/5:1.200</name>
+                <admin-status>up</admin-status>
+                <oper-status>up</oper-status>
+            </logical-interface>
+    </physical-interface>
+    <physical-interface>
+        <name>xe-1/0/6:1</name>
+        <admin-status>up</admin-status>
+        <oper-status>down</oper-status>
+            <logical-interface>
+                <name>xe-1/0/6:1.100</name>
+                <admin-status>up</admin-status>
+                <oper-status>down</oper-status>
+            </logical-interface>
+            <logical-interface>
+                <name>xe-1/0/6:1.200</name>
+                <admin-status>up</admin-status>
+                <oper-status>down</oper-status>
+            </logical-interface>
+    </physical-interface>
+</interface-information>

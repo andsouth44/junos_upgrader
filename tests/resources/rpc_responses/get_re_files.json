@@ -1,0 +1,28 @@
+{
+  "type": "dir",
+  "path": "/var/tmp/",
+  "file_count": 73,
+  "size": 7928393649,
+  "files": {
+    "junos-vmhost-install-mx-x86-64-19.4R3-S4.1.tgz": {
+      "type": "file",
+      "path": "junos-vmhost-install-mx-x86-64-19.4R3-S4.1.tgz",
+      "owner": "paul",
+      "size": 3920701908,
+      "permissions": 755,
+      "permissions_text": "-rwxr-xr-x",
+      "ts_date": "Mar 15 07:42",
+      "ts_epoc": "1744440498"
+    },
+    "junos-vmhost-install-mx-x86-64-22.4R3.25.tgz": {
+      "type": "file",
+      "path": "junos-vmhost-install-mx-x86-64-22.4R3.25.tgz",
+      "owner": "john",
+      "size": 4044498756,
+      "permissions": 644,
+      "permissions_text": "-rw-r--r--",
+      "ts_date": "Feb 29 14:46",
+      "ts_epoc": "1733484085"
+    }
+  }
+}

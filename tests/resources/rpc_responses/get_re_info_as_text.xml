@@ -1,0 +1,40 @@
+﻿<output>
+Routing Engine status:
+  Slot 0:
+    Current state                  Master
+    Election priority              Master (default)
+    Temperature                 44 degrees C / 111 degrees F
+    CPU temperature             41 degrees C / 105 degrees F
+    DRAM                      34567 MB (23456 MB installed)
+    Memory utilization           5 percent
+    5 sec CPU utilization:
+      User                       1 percent
+      Background                 0 percent
+      Kernel                     1 percent
+      Interrupt                  0 percent
+      Idle                      99 percent
+    1 min CPU utilization:
+      User                       1 percent
+      Background                 0 percent
+      Kernel                     1 percent
+      Interrupt                  0 percent
+      Idle                      98 percent
+    5 min CPU utilization:
+      User                       1 percent
+      Background                 0 percent
+      Kernel                     1 percent
+      Interrupt                  0 percent
+      Idle                      98 percent
+    15 min CPU utilization:
+      User                       1 percent
+      Background                 0 percent
+      Kernel                     1 percent
+      Interrupt                  0 percent
+      Idle                      98 percent
+    Model                          RE-S-1600x8
+    Start time                     2024-07-11 07:38:38 EDT
+    Uptime                         42 days, 1 hour, 30 minutes, 11 seconds
+    Last reboot reason             0x2000:hypervisor reboot
+    Load averages:                 1 minute   5 minute  15 minute
+                                       0.37       0.34       0.33
+</output>

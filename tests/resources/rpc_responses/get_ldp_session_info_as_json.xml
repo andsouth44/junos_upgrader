@@ -1,0 +1,40 @@
+<output>
+{
+    "ldp-session-information" : [
+    {
+        "attributes" : {"xmlns" : "http://xml.juniper.net/junos/22.4R0/junos-routing",
+                        "junos:style" : "brief"
+                       },
+        "ldp-session" : [
+        {
+            "ldp-neighbor-address" : [
+            {
+                "data" : "10.10.10.10"
+            }
+            ],
+            "ldp-session-state" : [
+            {
+                "data" : "Operational"
+            }
+            ],
+            "ldp-connection-state" : [
+            {
+                "data" : "Open"
+            }
+            ],
+            "ldp-remaining-time" : [
+            {
+                "data" : "25"
+            }
+            ],
+            "ldp-session-adv-mode" : [
+            {
+                "data" : "DU"
+            }
+            ]
+        }
+        ]
+    }
+    ]
+}
+</output>

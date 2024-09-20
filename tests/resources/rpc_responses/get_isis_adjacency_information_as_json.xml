@@ -1,0 +1,67 @@
+<output>
+{
+    "isis-adjacency-information" : [
+    {
+        "attributes" : {"xmlns" : "http://xml.juniper.net/junos/22.4R0/junos-routing",
+                        "junos:style" : "brief"
+                       },
+        "isis-adjacency" : [
+        {
+            "interface-name" : [
+            {
+                "data" : "ae17.100"
+            }
+            ],
+            "system-name" : [
+            {
+                "data" : "ABCD37383937"
+            }
+            ],
+            "level" : [
+            {
+                "data" : "1"
+            }
+            ],
+            "adjacency-state" : [
+            {
+                "data" : "Up"
+            }
+            ],
+            "holdtime" : [
+            {
+                "data" : "27"
+            }
+            ]
+        },
+        {
+            "interface-name" : [
+            {
+                "data" : "ae27.100"
+            }
+            ],
+            "system-name" : [
+            {
+                "data" : "ABCD37383937"
+            }
+            ],
+            "level" : [
+            {
+                "data" : "1"
+            }
+            ],
+            "adjacency-state" : [
+            {
+                "data" : "Up"
+            }
+            ],
+            "holdtime" : [
+            {
+                "data" : "29"
+            }
+            ]
+        }
+        ]
+    }
+    ]
+}
+</output>

@@ -1,0 +1,185 @@
+<chassis-inventory>
+    <chassis>
+        <name>Chassis</name>
+        <serial-number>373838383</serial-number>
+        <description>JNP10003 [MX10003]</description>
+        <clei-code>INM43838388</clei-code>
+        <model-number>JNP10003-CHAS</model-number>
+        <chassis-module>
+            <name>Midplane</name>
+            <version>REV 23</version>
+            <part-number>750-074276</part-number>
+            <serial-number>5474784856</serial-number>
+            <description>Midplane 2</description>
+            <clei-code>4647595067</clei-code>
+            <model-number>JNP10003-CHAS</model-number>
+        </chassis-module>
+        <chassis-module>
+            <name>Routing Engine 0</name>
+            <part-number>BUILTIN</part-number>
+            <serial-number>BUILTIN</serial-number>
+            <description>RE-S-1600x8</description>
+        </chassis-module>
+        <chassis-module>
+            <name>Routing Engine 1</name>
+            <part-number>BUILTIN</part-number>
+            <serial-number>BUILTIN</serial-number>
+            <description>RE-S-1600x8</description>
+        </chassis-module>
+        <chassis-module>
+            <name>CB 0</name>
+            <version>REV 38</version>
+            <part-number>750-067071</part-number>
+            <serial-number>464575959</serial-number>
+            <description>Control Board</description>
+            <clei-code>345474849</clei-code>
+            <model-number>JNP10003-RE1</model-number>
+            <chassis-sub-module>
+                <name>Mezz</name>
+                <version>REV 16</version>
+                <part-number>711-066896</part-number>
+                <serial-number>356363738</serial-number>
+                <description>Control Mezz Board</description>
+            </chassis-sub-module>
+        </chassis-module>
+        <chassis-module>
+            <name>CB 1</name>
+            <version>REV 38</version>
+            <part-number>750-067071</part-number>
+            <serial-number>36363739</serial-number>
+            <description>Control Board</description>
+            <clei-code>3737339</clei-code>
+            <model-number>JNP10003-RE1</model-number>
+            <chassis-sub-module>
+                <name>Mezz</name>
+                <version>REV 16</version>
+                <part-number>711-066896</part-number>
+                <serial-number>373738390</serial-number>
+                <description>Control Mezz Board</description>
+            </chassis-sub-module>
+        </chassis-module>
+        <chassis-module>
+            <name>FPC 1</name>
+            <version>REV 28</version>
+            <part-number>750-066879</part-number>
+            <serial-number>37383039</serial-number>
+            <description>LC2103</description>
+            <clei-code>265374948</clei-code>
+            <model-number>JNP10003-LC2103</model-number>
+            <chassis-sub-module>
+                <name>CPU</name>
+                <part-number>BUILTIN</part-number>
+                <serial-number>BUILTIN</serial-number>
+                <description>SMPC PMB</description>
+            </chassis-sub-module>
+            <chassis-sub-module>
+                <name>PIC 0</name>
+                <part-number>BUILTIN</part-number>
+                <serial-number>BUILTIN</serial-number>
+                <description>6xQSFPP</description>
+            </chassis-sub-module>
+            <chassis-sub-module>
+                <name>PIC 1</name>
+                <version>REV 27</version>
+                <part-number>750-068806</part-number>
+                <serial-number>484948724</serial-number>
+                <description>MIC1</description>
+                <clei-code>373894846</clei-code>
+                <model-number>JNP-MIC1</model-number>
+                <chassis-sub-sub-module>
+                    <name>Xcvr 0</name>
+                    <version>REV 01</version>
+                    <part-number>740-058732</part-number>
+                    <serial-number>464738038</serial-number>
+                    <description>QSFP-100GBASE-LR4</description>
+                </chassis-sub-sub-module>
+                <chassis-sub-sub-module>
+                    <name>Xcvr 4</name>
+                    <version>REV 01</version>
+                    <part-number>740-058732</part-number>
+                    <serial-number>374849493</serial-number>
+                    <description>QSFP-100GBASE-LR4</description>
+                </chassis-sub-sub-module>
+                <chassis-sub-sub-module>
+                    <name>Xcvr 10</name>
+                    <version>REV 01</version>
+                    <part-number>740-058732</part-number>
+                    <serial-number>37849494</serial-number>
+                    <description>QSFP-100GBASE-LR4</description>
+                </chassis-sub-sub-module>
+            </chassis-sub-module>
+        </chassis-module>
+        <chassis-module>
+            <name>PEM 0</name>
+            <version>REV 04</version>
+            <part-number>740-066938</part-number>
+            <serial-number>383734674</serial-number>
+            <description>JNP-PWR1100-DC</description>
+            <clei-code>38392022</clei-code>
+            <model-number>JNP-PWR1100-DC</model-number>
+        </chassis-module>
+        <chassis-module>
+            <name>PEM 1</name>
+            <version>REV 04</version>
+            <part-number>740-066938</part-number>
+            <serial-number>398382920</serial-number>
+            <description>JNP-PWR1100-DC</description>
+            <clei-code>384784940</clei-code>
+            <model-number>JNP-PWR1100-DC</model-number>
+        </chassis-module>
+        <chassis-module>
+            <name>PEM 2</name>
+            <version>REV 04</version>
+            <part-number>740-066938</part-number>
+            <serial-number>384849033</serial-number>
+            <description>JNP-PWR1100-DC</description>
+            <clei-code>384940932</clei-code>
+            <model-number>JNP-PWR1100-DC</model-number>
+        </chassis-module>
+        <chassis-module>
+            <name>PEM 3</name>
+            <version>REV 04</version>
+            <part-number>740-066938</part-number>
+            <serial-number>43940932020</serial-number>
+            <description>JNP-PWR1100-DC</description>
+            <clei-code>47389202030</clei-code>
+            <model-number>JNP-PWR1100-DC</model-number>
+        </chassis-module>
+        <chassis-module>
+            <name>Fan Tray 0</name>
+            <version>REV 13</version>
+            <part-number>760-069329</part-number>
+            <serial-number>45859093023</serial-number>
+            <description>JNP FAN 3RU</description>
+            <clei-code>48392022</clei-code>
+            <model-number>JNP-FAN-3RU</model-number>
+        </chassis-module>
+        <chassis-module>
+            <name>Fan Tray 1</name>
+            <version>REV 13</version>
+            <part-number>760-069329</part-number>
+            <serial-number>48303202</serial-number>
+            <description>JNP FAN 3RU</description>
+            <clei-code>4583492002</clei-code>
+            <model-number>JNP-FAN-3RU</model-number>
+        </chassis-module>
+        <chassis-module>
+            <name>Fan Tray 2</name>
+            <version>REV 13</version>
+            <part-number>760-069329</part-number>
+            <serial-number>485930202</serial-number>
+            <description>JNP FAN 3RU</description>
+            <clei-code>4583823902</clei-code>
+            <model-number>JNP-FAN-3RU</model-number>
+        </chassis-module>
+        <chassis-module>
+            <name>Fan Tray 3</name>
+            <version>REV 13</version>
+            <part-number>760-069329</part-number>
+            <serial-number>483892020</serial-number>
+            <description>JNP FAN 3RU</description>
+            <clei-code>484932020</clei-code>
+            <model-number>JNP-FAN-3RU</model-number>
+        </chassis-module>
+    </chassis>
+</chassis-inventory>

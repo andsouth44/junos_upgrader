@@ -1,0 +1,63 @@
+<route-engine-information>
+    <route-engine>
+        <slot>0</slot>
+        <mastership-state>master</mastership-state>
+        <mastership-priority>master (default)</mastership-priority>
+        <status>OK</status>
+        <temperature junos:celsius="42">42 degrees C / 107 degrees F</temperature>
+        <cpu-temperature junos:celsius="41">41 degrees C / 105 degrees F</cpu-temperature>
+        <memory-dram-size>34567 MB</memory-dram-size>
+        <memory-installed-size>(23456 MB installed)</memory-installed-size>
+        <memory-buffer-utilization>6</memory-buffer-utilization>
+        <cpu-user>1</cpu-user>
+        <cpu-background>0</cpu-background>
+        <cpu-system>1</cpu-system>
+        <cpu-interrupt>0</cpu-interrupt>
+        <cpu-idle>99</cpu-idle>
+        <cpu-user1>6</cpu-user1>
+        <cpu-background1>0</cpu-background1>
+        <cpu-system1>1</cpu-system1>
+        <cpu-interrupt1>0</cpu-interrupt1>
+        <cpu-idle1>93</cpu-idle1>
+        <cpu-user2>6</cpu-user2>
+        <cpu-background2>0</cpu-background2>
+        <cpu-system2>1</cpu-system2>
+        <cpu-interrupt2>0</cpu-interrupt2>
+        <cpu-idle2>93</cpu-idle2>
+        <cpu-user3>5</cpu-user3>
+        <cpu-background3>0</cpu-background3>
+        <cpu-system3>1</cpu-system3>
+        <cpu-interrupt3>0</cpu-interrupt3>
+        <cpu-idle3>94</cpu-idle3>
+        <model>RE-S-1600x8</model>
+        <start-time junos:seconds="45">2024-08-22 11:40:36 EDT</start-time>
+        <up-time junos:seconds="340030">3 days, 22 hours, 27 minutes, 10 seconds</up-time>
+        <last-reboot-reason>0x2000:hypervisor reboot</last-reboot-reason>
+        <load-average-one>0.23</load-average-one>
+        <load-average-five>0.23</load-average-five>
+        <load-average-fifteen>0.23</load-average-fifteen>
+    </route-engine>
+    <route-engine>
+        <slot>1</slot>
+        <mastership-state>backup</mastership-state>
+        <mastership-priority>backup (default)</mastership-priority>
+        <status>OK</status>
+        <temperature junos:celsius="40">40 degrees C / 104 degrees F</temperature>
+        <cpu-temperature junos:celsius="40">40 degrees C / 104 degrees F</cpu-temperature>
+        <memory-dram-size>34567 MB</memory-dram-size>
+        <memory-installed-size>(34567 MB installed)</memory-installed-size>
+        <memory-buffer-utilization>4</memory-buffer-utilization>
+        <cpu-user>5</cpu-user>
+        <cpu-background>0</cpu-background>
+        <cpu-system>1</cpu-system>
+        <cpu-interrupt>0</cpu-interrupt>
+        <cpu-idle>95</cpu-idle>
+        <model>RE-S-1600x8</model>
+        <start-time junos:seconds="1724341804">2024-08-22 11:50:04 EDT</start-time>
+        <up-time junos:seconds="10">3 days, 22 hours, 17 minutes, 36 seconds</up-time>
+        <last-reboot-reason>0x4000:VJUNOS reboot</last-reboot-reason>
+        <load-average-one>0.23</load-average-one>
+        <load-average-five>0.34</load-average-five>
+        <load-average-fifteen>0.45</load-average-fifteen>
+    </route-engine>
+</route-engine-information>

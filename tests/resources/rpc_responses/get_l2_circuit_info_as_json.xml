@@ -1,0 +1,67 @@
+<output>
+{
+    "l2circuit-connection-information" : [
+    {
+        "attributes" : {"xmlns" : "http://xml.juniper.net/junos/22.4R0/junos-routing",
+                        "junos:style" : "normal"
+                       },
+        "l2circuit-neighbor" : [
+        {
+            "neighbor-address" : [
+            {
+                "data" : "10.10.10.10"
+            }
+            ],
+            "connection" : [
+            {
+                "attributes" : {"heading" : "Interface                 Type  St     Time last up          # Up trans"},
+                "connection-id" : [
+                {
+                    "data" : "lt-1/2/0.2323(vc 200)"
+                }
+                ],
+                "connection-type" : [
+                {
+                    "data" : "rmt"
+                }
+                ],
+                "connection-status" : [
+                {
+                    "data" : "OL"
+                }
+                ]
+            }
+            ]
+        },
+        {
+            "neighbor-address" : [
+            {
+                "data" : "11.11.11.11"
+            }
+            ],
+            "connection" : [
+            {
+                "attributes" : {"heading" : "Interface                 Type  St     Time last up          # Up trans"},
+                "connection-id" : [
+                {
+                    "data" : "lt-1/2/0.3(vc 100)"
+                }
+                ],
+                "connection-type" : [
+                {
+                    "data" : "rmt"
+                }
+                ],
+                "connection-status" : [
+                {
+                    "data" : "OL"
+                }
+                ]
+            }
+            ]
+        }
+        ]
+    }
+    ]
+}
+</output>

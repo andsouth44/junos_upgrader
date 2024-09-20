@@ -1,0 +1,11 @@
+<route-engine-information>
+    <route-engine>
+        <mastership-state>master</mastership-state>
+        <model>RE-S-1600x8</model>
+        <status>OK</status>
+        <memory-buffer-utilization>5</memory-buffer-utilization>
+        <cpu-idle>99</cpu-idle>
+    </route-engine>
+</route-engine-information>
+
+

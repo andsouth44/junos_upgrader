@@ -1,0 +1,138 @@
+<output>
+{
+    "bgp-information" : [
+    {
+        "attributes" : {"xmlns" : "http://xml.juniper.net/junos/22.4R0/junos-routing"},
+        "bgp-thread-mode" : [
+        {
+            "data" : "BGP I/O"
+        }
+        ],
+        "thread-state" : [
+        {
+        }
+        ],
+        "default-ebgp-advertise-mode" : [
+        {
+            "data" : "accept"
+        }
+        ],
+        "default-ebgp-receive-mode" : [
+        {
+            "data" : "accept"
+        }
+        ],
+        "group-count" : [
+        {
+            "data" : "2"
+        }
+        ],
+        "peer-count" : [
+        {
+            "data" : "4"
+        }
+        ],
+        "down-peer-count" : [
+        {
+            "data" : "0"
+        }
+        ],
+        "bgp-rib" : [
+        {
+            "attributes" : {"junos:style" : "brief"},
+            "name" : [
+            {
+                "data" : "inet.0"
+            }
+            ],
+            "total-prefix-count" : [
+            {
+                "data" : "1889668"
+            }
+            ],
+            "received-prefix-count" : [
+            {
+                "data" : "1889668"
+            }
+            ],
+            "accepted-prefix-count" : [
+            {
+                "data" : "433890"
+            }
+            ],
+            "active-prefix-count" : [
+            {
+                "data" : "218111"
+            }
+            ],
+            "suppressed-prefix-count" : [
+            {
+                "data" : "0"
+            }
+            ],
+            "history-prefix-count" : [
+            {
+                "data" : "0"
+            }
+            ],
+            "damped-prefix-count" : [
+            {
+                "data" : "0"
+            }
+            ],
+            "total-external-prefix-count" : [
+            {
+                "data" : "0"
+            }
+            ],
+            "active-external-prefix-count" : [
+            {
+                "data" : "0"
+            }
+            ],
+            "accepted-external-prefix-count" : [
+            {
+                "data" : "0"
+            }
+            ],
+            "suppressed-external-prefix-count" : [
+            {
+                "data" : "0"
+            }
+            ],
+            "total-internal-prefix-count" : [
+            {
+                "data" : "1889668"
+            }
+            ],
+            "active-internal-prefix-count" : [
+            {
+                "data" : "218111"
+            }
+            ],
+            "accepted-internal-prefix-count" : [
+            {
+                "data" : "433890"
+            }
+            ],
+            "suppressed-internal-prefix-count" : [
+            {
+                "data" : "0"
+            }
+            ],
+            "pending-prefix-count" : [
+            {
+                "data" : "0"
+            }
+            ],
+            "bgp-rib-state" : [
+            {
+                "data" : "BGP restart is complete"
+            }
+            ]
+        }
+        ]
+    }
+    ]
+}
+</output>

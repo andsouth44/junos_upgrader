@@ -1,0 +1,18 @@
+<output>
+{
+    "alarm-information" : [
+    {
+        "attributes" : {"xmlns" : "http://xml.juniper.net/junos/22.4R0/junos-alarm"},
+        "alarm-summary" : [
+        {
+            "no-active-alarms" : [
+            {
+                "data" : [null]
+            }
+            ]
+        }
+        ]
+    }
+    ]
+}
+</output>

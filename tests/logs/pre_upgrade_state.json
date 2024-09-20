@@ -1,0 +1,228 @@
+{
+    "chassis_hardware": [
+        {
+            "name": "Midplane",
+            "description": "Midplane 2"
+        },
+        {
+            "name": "Routing Engine 0",
+            "description": "RE-S-1600x8"
+        },
+        {
+            "name": "Routing Engine 1",
+            "description": "RE-S-1600x8"
+        },
+        {
+            "name": "CB 0",
+            "description": "Control Board"
+        },
+        {
+            "name": "CB 1",
+            "description": "Control Board"
+        },
+        {
+            "name": "FPC 1",
+            "description": "LC2103"
+        },
+        {
+            "name": "PEM 0",
+            "description": "JNP-PWR1100-DC"
+        },
+        {
+            "name": "PEM 1",
+            "description": "JNP-PWR1100-DC"
+        },
+        {
+            "name": "PEM 2",
+            "description": "JNP-PWR1100-DC"
+        },
+        {
+            "name": "PEM 3",
+            "description": "JNP-PWR1100-DC"
+        },
+        {
+            "name": "Fan Tray 0",
+            "description": "JNP FAN 3RU"
+        },
+        {
+            "name": "Fan Tray 1",
+            "description": "JNP FAN 3RU"
+        },
+        {
+            "name": "Fan Tray 2",
+            "description": "JNP FAN 3RU"
+        },
+        {
+            "name": "Fan Tray 3",
+            "description": "JNP FAN 3RU"
+        }
+    ],
+    "subscriber-count-per-type": {
+        "vlan": 10,
+        "pppoe": 5,
+        "dhcp": 10
+    },
+    "isis-adjacency-info": [
+        {
+            "interface": "ae17.100",
+            "level": "1",
+            "state": "Up"
+        },
+        {
+            "interface": "ae27.100",
+            "level": "1",
+            "state": "Up"
+        }
+    ],
+    "bgp-summary": [
+        {
+            "address": "11.11.11.11",
+            "state": "Established"
+        },
+        {
+            "address": "12.12.12.12",
+            "state": "Established"
+        }
+    ],
+    "interface-summary": [
+        {
+            "name": "xe-1/0/5:1.100",
+            "admin-status": "up",
+            "oper-status": "up"
+        },
+        {
+            "name": "xe-1/0/5:1.200",
+            "admin-status": "up",
+            "oper-status": "up"
+        },
+        {
+            "name": "xe-1/0/6:1.100",
+            "admin-status": "up",
+            "oper-status": "down"
+        },
+        {
+            "name": "xe-1/0/6:1.200",
+            "admin-status": "up",
+            "oper-status": "down"
+        }
+    ],
+    "ldp-neighbors": [
+        {
+            "neighbor": "10.10.10.10",
+            "session_state": "Operational",
+            "connection_state": "Open"
+        },
+        {
+            "neighbor": "11.11.11.11",
+            "session_state": "Operational",
+            "connection_state": "Open"
+        }
+    ],
+    "replication-state": [
+        {
+            "OSPF": "Complete"
+        },
+        {
+            "BGP": "Complete"
+        },
+        {
+            "IS-IS": "Complete"
+        },
+        {
+            "MPLS": "Complete"
+        },
+        {
+            "RSVP": "Complete"
+        },
+        {
+            "LDP": "Complete"
+        },
+        {
+            "EVPN": "Complete"
+        }
+    ],
+    "bfd-session-state": "No sessions",
+    "pic-info": [
+        {
+            "fpc_slot": "1",
+            "fpc_state": "Online",
+            "fpc_description": "LC2103",
+            "pic_slot": "0",
+            "pic_state": "Online",
+            "pic_description": "6xQSFPP"
+        },
+        {
+            "fpc_slot": "1",
+            "fpc_state": "Online",
+            "fpc_description": "LC2103",
+            "pic_slot": "1",
+            "pic_state": "Online",
+            "pic_description": "MIC1"
+        }
+    ],
+    "chassis-alarms": "No active alarms",
+    "l2circuit-info": [
+        {
+            "connection-address": "10.10.10.10",
+            "connection-id": "lt-1/2/0.2323(vc 200)",
+            "connection-type": "rmt",
+            "connection-status": "Up"
+        },
+        {
+            "connection-address": "11.11.11.11",
+            "connection-id": "lt-1/2/0.3(vc 100)",
+            "connection-type": "rmt",
+            "connection-status": "Up"
+        }
+    ],
+    "route-summary": [
+        {
+            "route_table_name": "inet.0",
+            "protocol-name": "Direct",
+            "protocol-route-count": "142",
+            "active-routes": "142"
+        },
+        {
+            "route_table_name": "inet.0",
+            "protocol-name": "Local",
+            "protocol-route-count": "5",
+            "active-routes": "5"
+        },
+        {
+            "route_table_name": "inet.0",
+            "protocol-name": "BGP",
+            "protocol-route-count": "1888623",
+            "active-routes": "217557"
+        },
+        {
+            "route_table_name": "inet.0",
+            "protocol-name": "Static",
+            "protocol-route-count": "135",
+            "active-routes": "135"
+        },
+        {
+            "route_table_name": "inet.0",
+            "protocol-name": "IS-IS",
+            "protocol-route-count": "1423",
+            "active-routes": "1423"
+        },
+        {
+            "route_table_name": "inet.0",
+            "protocol-name": "LDP",
+            "protocol-route-count": "1",
+            "active-routes": "1"
+        },
+        {
+            "route_table_name": "inet.0",
+            "protocol-name": "Access-internal",
+            "protocol-route-count": "5",
+            "active-routes": "5"
+        },
+        {
+            "route_table_name": "inet.3",
+            "protocol-name": "L-ISIS",
+            "protocol-route-count": "1409",
+            "active-routes": "1409"
+        }
+    ]
+}

@@ -1,0 +1,31 @@
+<output>
+{
+    "bfd-session-information" : [
+    {
+        "attributes" : {"xmlns" : "http://xml.juniper.net/junos/22.4R0/junos-bfd",
+                        "junos:style" : "brief"
+                       },
+        "sessions" : [
+        {
+            "data" : "0"
+        }
+        ],
+        "clients" : [
+        {
+            "data" : "0"
+        }
+        ],
+        "cumulative-transmission-rate" : [
+        {
+            "data" : "0.0"
+        }
+        ],
+        "cumulative-reception-rate" : [
+        {
+            "data" : "0.0"
+        }
+        ]
+    }
+    ]
+}
+</output>

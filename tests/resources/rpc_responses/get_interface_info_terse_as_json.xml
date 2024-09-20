@@ -1,0 +1,154 @@
+<output>
+{
+    "interface-information" : [
+    {
+        "attributes" : {"xmlns" : "http://xml.juniper.net/junos/22.4R0/junos-interface",
+                        "junos:style" : "terse"
+                       },
+        "physical-interface" : [
+        {
+            "name" : [
+            {
+                "data" : "xe-1/0/5:0"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ]
+        },
+        {
+            "name" : [
+            {
+                "data" : "xe-1/0/5:1"
+            }
+            ],
+            "admin-status" : [
+            {
+                "data" : "up"
+            }
+            ],
+            "oper-status" : [
+            {
+                "data" : "down"
+            }
+            ],
+            "logical-interface" : [
+            {
+                "name" : [
+                {
+                    "data" : "xe-1/0/5:1.100"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "filter-information" : [
+                {
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "aenet"
+                    }
+                    ],
+                    "ae-bundle-name" : [
+                    {
+                        "data" : "ae55.100"
+                    }
+                    ]
+                }
+                ]
+            },
+            {
+                "name" : [
+                {
+                    "data" : "xe-1/0/5:1.200"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "filter-information" : [
+                {
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "aenet"
+                    }
+                    ],
+                    "ae-bundle-name" : [
+                    {
+                        "data" : "ae55.200"
+                    }
+                    ]
+                }
+                ]
+            },
+            {
+                "name" : [
+                {
+                    "data" : "xe-1/0/5:1.32767"
+                }
+                ],
+                "admin-status" : [
+                {
+                    "data" : "up"
+                }
+                ],
+                "oper-status" : [
+                {
+                    "data" : "down"
+                }
+                ],
+                "filter-information" : [
+                {
+                }
+                ],
+                "address-family" : [
+                {
+                    "address-family-name" : [
+                    {
+                        "data" : "aenet"
+                    }
+                    ],
+                    "ae-bundle-name" : [
+                    {
+                        "data" : "ae55.32767"
+                    }
+                    ]
+                }
+                ]
+            }
+            ]
+        }
+        ]
+    }
+    ]
+}
+</output>

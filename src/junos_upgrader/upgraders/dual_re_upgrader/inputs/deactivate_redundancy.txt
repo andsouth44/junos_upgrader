@@ -1,0 +1,7 @@
+deactivate chassis redundancy graceful-switchover
+deactivate routing-options nonstop-routing
+deactivate routing-options nsr-phantom-holdtime
+deactivate system switchover-on-routing-crash
+deactivate system commit synchronize
+deactivate system commit fast-synchronize
+delete chassis fpc 1 error major action reset
