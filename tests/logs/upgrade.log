@@ -182,6 +182,6 @@ Route summary recorded. ✅
 +set interfaces xe-1/0/5:2 unit 40 vlan-id 41
 ********** COMPARING PRE & POST STATE **********
 ⚠️ WARNING: There are the following differences between pre and post state:
-Parameter subscriber-count-per-type.pppoe: has values: before 5, after 4
 Parameter subscriber-count-per-type.vlan: has values: before 10, after 9
+Parameter subscriber-count-per-type.pppoe: has values: before 5, after 4
 Enjoy your favorite beverage! 😀

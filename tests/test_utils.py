@@ -170,7 +170,7 @@ class TestUtils:
         """
         Some RPCs return a lxml.etree._Element instead of a lxml.etree.elementTree.
         An lxml.etree._Element is the root element of a lxml.etree.elementTree.
-        This method returns the root element of a lxml.etree.elementTree.
+        This method returns the root element from a xml file.
         """
         element_tree = etree.parse(Path(sys.path[0]).joinpath('resources', file_name))
         return element_tree.getroot()

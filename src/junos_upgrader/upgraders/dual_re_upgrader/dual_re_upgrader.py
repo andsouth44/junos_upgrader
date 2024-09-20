@@ -11,8 +11,24 @@ from helpers import Helpers
 
 def dual_re_upgrade_upgrader():
     """
-    This module is designed to upgrade the JunOS on MX series routers with dual REs.
+    This module is designed to upgrade the JunOS on MX series routers with dual REs
+    with the following redundancy features enabled:
+
+        activate chassis redundancy graceful-switchover
+        activate routing-options nonstop-routing
+        activate routing-options nsr-phantom-holdtime
+        activate system switchover-on-routing-crash
+        activate system commit synchronize
+        activate system commit fast-synchronize
+        set chassis fpc 1 error major action reset-pfe
+
+    Insert your parameters in:
+
+        dual_re_upgrader/inputs/USER_INPUTS.json
+        dual_re_upgrader/inputs/TEST_PARAMS.json
+
     Independent IP connectivity to both REs is required.
+
     """
     input_args, test_params = Helpers.create_inputs_json_and_test_params_json()
     re0_host: str = input_args.get("RE0_HOST")
