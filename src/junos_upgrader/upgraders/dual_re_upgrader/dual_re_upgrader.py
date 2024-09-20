@@ -469,16 +469,16 @@ def dual_re_upgrade_upgrader():
 
     logger.info('********** UPGRADE COMPLETE **********')
 
+    # if 1 or more warnings
     if len(upgrade_warning_log) != 0:
-        # 1 or more warnings
         error = '********** \u26A0\uFE0F: THERE ARE ONE OR MORE UPGRADE WARNINGS **********'
         logger.error(error)
 
         for warning in upgrade_warning_log:
             logger.error(warning)
 
+    # if 1 or more errors
     if len(upgrade_error_log) != 0:
-        # 1 or more errors
         error = '********** \u274C: THERE ARE ONE OR MORE UPGRADE ERRORS **********'
         logger.error(error)
 

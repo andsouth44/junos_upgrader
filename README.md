@@ -10,15 +10,15 @@ junos_upgrader is:
 
 junos_upgrader has 3 main parts:
 
-* RPC Caller module - a repository of methods to call PyEZ RPCs.
-* RPC Processor module - a repository of methods that call RPCs from the RPC Caller module and process the RPC call responses as required.
-* Upgraders - a set of upgraders for different purposes, e.g. dual RE device processor, single RE device processor etc. Each upgrader runs a series of RPC Processor calls to achieve the required upgrade steps for the device being upgraded.
+* RPC Caller module - a repository of methods, based on cli commands, that call the equivalent PyEz RPCs.
+* RPC Processor module - a repository of methods that call methods from the RPC Caller module and process the RPC call responses as required.
+* Upgraders - a set of upgraders for different purposes, e.g. dual RE device processor, single RE device processor etc. Each upgrader runs a series of RPC Processor methods to achieve the required upgrade steps for the device being upgraded.
 
 ### How to use junos_upgrader
 
 * Clone the repo
-* Develop a new Upgrader module or pick an existing Upgrader module that matches your requirements
-* Populate the input file
+* Pick an existing Upgrader module that matches your requirements or develop a new Upgrader
+* Populate the input files as appropriate
 * Run the upgrader from CLI - "python3 upgrader_name"
 
 Each upgrader should include the following flags:
@@ -30,10 +30,10 @@ Each upgrader should include the following flags:
 ### Contributing
 
 Contributors can add functionality to the application: 
-* If RPC calls are missing they can be added to the RPC Caller module.
-* If different processing of an RPC response is required it can be added to the RPC Processor module.
+* RPC calls can be added to the RPC Caller module.
+* RPC response processors can be added to the RPC Processor module.
 * If a new Upgrader is required it can be added to the 'upgraders' folder.
-* All additions must closely follow the structure and style of existing code.
+* Additions must closely follow the structure and style of existing code.
 
 To contribute, please follow normal Git work flow best practices, i.e. fork the repo, create your own dev branch, add you code, commit, issue a pull request
 
