@@ -142,15 +142,16 @@ def dual_re_upgrade_upgrader():
     # get pre upgrade config
     pre_upgrade_config = rpc_processor_re0.get_config_in_set_format()
 
-    # write pre upgrade config to log file
-    with open('logs/pre_upgrade_config.txt', 'w') as file:
-        file.write(pre_upgrade_config)
+    if pre_upgrade_config is not None:
+        # write pre upgrade config to log file
+        with open('logs/pre_upgrade_config.txt', 'w') as file:
+            file.write(pre_upgrade_config)
 
     # verify no chassis alarms
     rpc_processor_re0.verify_no_chassis_alarms()
 
     # Verify RE0 is Master
-    rpc_processor_re0.verify_re_mastership(slot=0)
+    rpc_processor_re0.verify_re_mastership(slot=0, retry=False)
 
     # verify RE0 status
     status = rpc_processor_re0.verify_re_status(slot=0)
@@ -290,7 +291,7 @@ def dual_re_upgrade_upgrader():
         logger.error(error)
 
         for error in upgrade_error_log:
-            print(error)
+            logger.error(error)
 
         rpc_processor_re0.dev.close()
         rpc_processor_re1.dev.close()

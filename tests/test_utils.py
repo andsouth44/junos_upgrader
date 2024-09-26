@@ -120,14 +120,18 @@ class TestUtils:
         load3 = mock_file_load('rpc_responses/get_software_information_new.xml')
         load4 = mock_file_load('rpc_responses/get_software_information_new.xml')
 
-        junos_version_to_be_returned = [load1, load2, load3, load4]
+        junos_versions_to_be_returned = [load1, load2, load3, load4]
         version_idx = 0
 
         @classmethod
         def get_version(cls):
-            version_files = cls.junos_version_to_be_returned[cls.version_idx]
+            version_file = cls.junos_versions_to_be_returned[cls.version_idx]
             cls.version_idx += 1
-            return version_files
+            return version_file
+
+        @classmethod
+        def reset(cls):
+            cls.version_idx = 0
 
     @staticmethod
     def create_mock_inputs_json_and_test_params_json():
@@ -145,6 +149,11 @@ class TestUtils:
         return formatter, file_handler, logger
 
     @staticmethod
+    def remove_logger_handlers(logger):
+        for handler in logger.handlers:
+            logger.removeHandler(handler)
+
+    @staticmethod
     def do_nothing(*args, **kwargs):
         return
 
@@ -155,6 +164,10 @@ class TestUtils:
     @staticmethod
     def set_device_connected(dev) -> None:
         dev.connected = True
+
+    @staticmethod
+    def raise_exception(*args, **kwargs):
+        raise Exception("test")
 
     @staticmethod
     def load_test_file(file_name) -> dict:
@@ -181,16 +194,12 @@ class TestUtils:
 
     @staticmethod
     def get_device_info_success(*args, **kwargs):
-        if args[1].tag == 'get-chassis-inventory':
-            return TestUtils.load_test_file_as_etree('rpc_responses/get_chassis_hardware_as_xml.xml')
         if args[1].tag == 'get-configuration':
             return TestUtils.ShowConfigMockerSuccess.get_config()
-        elif args[1].tag == 'get-route-engine-information':
-            return TestUtils.load_test_file_as_etree('rpc_responses/get_re_info.xml')
         elif args[1].tag == 'get-alarm-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_chassis_alarm_information_none_as_xml.xml')
-        elif args[1].tag == 'get-bgp-summary-information':
-            return TestUtils.load_test_file_as_etree('rpc_responses/get_bgp_peers_by_group.xml')
+        elif args[1].tag == 'get-route-engine-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_re_info.xml')
         elif args[1].tag == 'get-routing-task-replication-state':
             return TestUtils.load_test_file_as_element('rpc_responses/get_protocol_replication_state.xml')
         elif args[1].tag == 'get-pic-information':
@@ -201,26 +210,28 @@ class TestUtils:
             return TestUtils.load_test_file_as_etree('rpc_responses/get_vmhost_version.xml')
         elif args[1].tag == 'get-isis-adjacency-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_isis_adjacency_information.xml')
-        elif args[1].tag == 'get-interface-information':
-            return TestUtils.load_test_file_as_etree('rpc_responses/get_interface_info_terse_as_xml.xml')
-        elif args[1].tag == 'get-subscribers':
-            return TestUtils.ShowSubscribersMockerSuccess.get_subscribers()
-        elif args[1].tag == 'get-l2ckt-connection-information':
-            return TestUtils.load_test_file_as_etree('rpc_responses/get_l2_circuit_info_as_xml.xml')
-        elif args[1].tag == 'get-ldp-session-information':
-            return TestUtils.load_test_file_as_etree('rpc_responses/get_ldp_session_info_as_xml.xml')
-        elif args[1].tag == 'get-route-summary-information':
-            return TestUtils.load_test_file_as_etree('rpc_responses/get_route_summary_as_xml.xml')
-        elif args[1].tag == 'get-bfd-session-information':
-            return TestUtils.load_test_file_as_etree('rpc_responses/get_bfd_session_info_as_xml.xml')
         elif args[1].tag == 'file-copy':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_configuration_in_set_format.xml')
+        elif args[1].tag == 'get-chassis-inventory':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_chassis_hardware_as_xml.xml')
+        elif args[1].tag == 'get-subscribers':
+            return TestUtils.ShowSubscribersMockerSuccess.get_subscribers()
+        elif args[1].tag == 'get-bgp-summary-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_bgp_peers_by_group.xml')
+        elif args[1].tag == 'get-interface-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_interface_info_terse_as_xml.xml')
+        elif args[1].tag == 'get-ldp-session-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_ldp_session_info_as_xml.xml')
+        elif args[1].tag == 'get-bfd-session-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_bfd_session_info_as_xml.xml')
+        elif args[1].tag == 'get-l2ckt-connection-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_l2_circuit_info_as_xml.xml')
+        elif args[1].tag == 'get-route-summary-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_route_summary_as_xml.xml')
         elif args[1].tag == 'request-vmhost-package-add':
             return TestUtils.do_nothing()
         elif args[1].tag == 'request-vmhost-reboot':
             return TestUtils.do_nothing()
-        elif args[1].tag == 'request-vmhost-snapshot':
-            return TestUtils.MockEtreeResponse('Software snapshot done')
         elif args[1].tag == 'request-vmhost-package-validate' and args[1].attrib == {'format': 'text'}:
             return TestUtils.load_test_file_as_etree('rpc_responses/request_vmhost_package_validate.xml')
         elif args[1].tag == 'request-chassis-routing-engine-switch':
@@ -230,16 +241,12 @@ class TestUtils:
 
     @staticmethod
     def get_device_info_warnings(*args, **kwargs):
-        if args[1].tag == 'get-chassis-inventory':
-            return TestUtils.load_test_file_as_etree('rpc_responses/get_chassis_hardware_as_xml.xml')
         if args[1].tag == 'get-configuration':
             return TestUtils.ShowConfigMockerWarnings.get_config()
-        elif args[1].tag == 'get-route-engine-information':
-            return TestUtils.load_test_file_as_etree('rpc_responses/get_re_info.xml')
         elif args[1].tag == 'get-alarm-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_chassis_alarm_information_none_as_xml.xml')
-        elif args[1].tag == 'get-bgp-summary-information':
-            return TestUtils.load_test_file_as_etree('rpc_responses/get_bgp_peers_by_group.xml')
+        elif args[1].tag == 'get-route-engine-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_re_info.xml')
         elif args[1].tag == 'get-routing-task-replication-state':
             return TestUtils.load_test_file_as_element('rpc_responses/get_protocol_replication_state.xml')
         elif args[1].tag == 'get-pic-information':
@@ -250,29 +257,211 @@ class TestUtils:
             return TestUtils.load_test_file_as_etree('rpc_responses/get_vmhost_version.xml')
         elif args[1].tag == 'get-isis-adjacency-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_isis_adjacency_information.xml')
-        elif args[1].tag == 'get-interface-information':
-            return TestUtils.load_test_file_as_etree('rpc_responses/get_interface_info_terse_as_xml.xml')
-        elif args[1].tag == 'get-subscribers':
-            return TestUtils.ShowSubscribersMockerWarnings.get_subscribers()
-        elif args[1].tag == 'get-l2ckt-connection-information':
-            return TestUtils.load_test_file_as_etree('rpc_responses/get_l2_circuit_info_as_xml.xml')
-        elif args[1].tag == 'get-ldp-session-information':
-            return TestUtils.load_test_file_as_etree('rpc_responses/get_ldp_session_info_as_xml.xml')
-        elif args[1].tag == 'get-route-summary-information':
-            return TestUtils.load_test_file_as_etree('rpc_responses/get_route_summary_as_xml.xml')
-        elif args[1].tag == 'get-bfd-session-information':
-            return TestUtils.load_test_file_as_etree('rpc_responses/get_bfd_session_info_as_xml.xml')
         elif args[1].tag == 'file-copy':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_configuration_in_set_format.xml')
+        elif args[1].tag == 'get-chassis-inventory':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_chassis_hardware_as_xml.xml')
+        elif args[1].tag == 'get-subscribers':
+            return TestUtils.ShowSubscribersMockerWarnings.get_subscribers()
+        elif args[1].tag == 'get-bgp-summary-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_bgp_peers_by_group.xml')
+        elif args[1].tag == 'get-interface-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_interface_info_terse_as_xml.xml')
+        elif args[1].tag == 'get-ldp-session-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_ldp_session_info_as_xml.xml')
+        elif args[1].tag == 'get-bfd-session-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_bfd_session_info_as_xml.xml')
+        elif args[1].tag == 'get-l2ckt-connection-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_l2_circuit_info_as_xml.xml')
+        elif args[1].tag == 'get-route-summary-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_route_summary_as_xml.xml')
         elif args[1].tag == 'request-vmhost-package-add':
             return TestUtils.do_nothing()
         elif args[1].tag == 'request-vmhost-reboot':
             return TestUtils.do_nothing()
-        elif args[1].tag == 'request-vmhost-snapshot':
-            return TestUtils.MockEtreeResponse('Software snapshot done')
         elif args[1].tag == 'request-vmhost-package-validate' and args[1].attrib == {'format': 'text'}:
             return TestUtils.load_test_file_as_etree('rpc_responses/request_vmhost_package_validate.xml')
         elif args[1].tag == 'request-chassis-routing-engine-switch':
             return TestUtils.load_test_file_as_etree('rpc_responses/request_re_switchover.xml')
+        else:
+            assert False
+
+    @staticmethod
+    def get_device_info_config_fail(*args, **kwargs):
+        if args[1].tag == 'get-configuration':
+            return TestUtils.do_nothing()
+        elif args[1].tag == 'get-alarm-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_chassis_alarm_information_none_as_xml.xml')
+        elif args[1].tag == 'get-route-engine-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_re_info.xml')
+        elif args[1].tag == 'get-routing-task-replication-state':
+            return TestUtils.load_test_file_as_element('rpc_responses/get_protocol_replication_state.xml')
+        elif args[1].tag == 'get-pic-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_pic_info_as_xml.xml')
+        elif args[1].tag == 'get-software-information':
+            return TestUtils.ShowJunosVersion.get_version()
+        elif args[1].tag == 'get-vmhost-version-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_vmhost_version.xml')
+        elif args[1].tag == 'get-isis-adjacency-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_isis_adjacency_information.xml')
+        elif args[1].tag == 'file-copy':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_configuration_in_set_format.xml')
+        elif args[1].tag == 'get-chassis-inventory':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_chassis_hardware_as_xml.xml')
+        elif args[1].tag == 'get-subscribers':
+            return TestUtils.ShowSubscribersMockerSuccess.get_subscribers()
+        elif args[1].tag == 'get-bgp-summary-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_bgp_peers_by_group.xml')
+        elif args[1].tag == 'get-interface-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_interface_info_terse_as_xml.xml')
+        elif args[1].tag == 'get-ldp-session-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_ldp_session_info_as_xml.xml')
+        elif args[1].tag == 'get-bfd-session-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_bfd_session_info_as_xml.xml')
+        elif args[1].tag == 'get-l2ckt-connection-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_l2_circuit_info_as_xml.xml')
+        elif args[1].tag == 'get-route-summary-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_route_summary_as_xml.xml')
+        elif args[1].tag == 'request-vmhost-package-add':
+            return TestUtils.do_nothing()
+        elif args[1].tag == 'request-vmhost-reboot':
+            return TestUtils.do_nothing()
+        elif args[1].tag == 'request-vmhost-package-validate' and args[1].attrib == {'format': 'text'}:
+            return TestUtils.load_test_file_as_etree('rpc_responses/request_vmhost_package_validate.xml')
+        elif args[1].tag == 'request-chassis-routing-engine-switch':
+            return TestUtils.load_test_file_as_etree('rpc_responses/request_re_switchover.xml')
+        else:
+            assert False
+
+    @staticmethod
+    def get_device_info_chassis_alarm_fail(*args, **kwargs):
+        if args[1].tag == 'get-configuration':
+            return TestUtils.ShowConfigMockerSuccess.get_config()
+        elif args[1].tag == 'get-alarm-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_chassis_alarm_information_as_xml.xml')
+        elif args[1].tag == 'get-route-engine-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_re_info.xml')
+        elif args[1].tag == 'get-routing-task-replication-state':
+            return TestUtils.load_test_file_as_element('rpc_responses/get_protocol_replication_state.xml')
+        elif args[1].tag == 'get-pic-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_pic_info_as_xml.xml')
+        elif args[1].tag == 'get-software-information':
+            return TestUtils.ShowJunosVersion.get_version()
+        elif args[1].tag == 'get-vmhost-version-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_vmhost_version.xml')
+        elif args[1].tag == 'get-isis-adjacency-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_isis_adjacency_information.xml')
+        elif args[1].tag == 'file-copy':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_configuration_in_set_format.xml')
+        elif args[1].tag == 'get-chassis-inventory':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_chassis_hardware_as_xml.xml')
+        elif args[1].tag == 'get-subscribers':
+            return TestUtils.ShowSubscribersMockerSuccess.get_subscribers()
+        elif args[1].tag == 'get-bgp-summary-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_bgp_peers_by_group.xml')
+        elif args[1].tag == 'get-interface-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_interface_info_terse_as_xml.xml')
+        elif args[1].tag == 'get-ldp-session-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_ldp_session_info_as_xml.xml')
+        elif args[1].tag == 'get-bfd-session-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_bfd_session_info_as_xml.xml')
+        elif args[1].tag == 'get-l2ckt-connection-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_l2_circuit_info_as_xml.xml')
+        elif args[1].tag == 'get-route-summary-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_route_summary_as_xml.xml')
+        elif args[1].tag == 'request-vmhost-package-add':
+            return TestUtils.do_nothing()
+        elif args[1].tag == 'request-vmhost-reboot':
+            return TestUtils.do_nothing()
+        elif args[1].tag == 'request-vmhost-package-validate' and args[1].attrib == {'format': 'text'}:
+            return TestUtils.load_test_file_as_etree('rpc_responses/request_vmhost_package_validate.xml')
+        elif args[1].tag == 'request-chassis-routing-engine-switch':
+            return TestUtils.load_test_file_as_etree('rpc_responses/request_re_switchover.xml')
+        else:
+            assert False
+
+    @staticmethod
+    def get_device_info_mastership_backup(*args, **kwargs):
+        if args[1].tag == 'get-configuration':
+            return TestUtils.ShowConfigMockerSuccess.get_config()
+        elif args[1].tag == 'get-alarm-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_chassis_alarm_information_none_as_xml.xml')
+        elif args[1].tag == 'get-route-engine-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_re_info_backup_mastership.xml')
+        elif args[1].tag == 'get-routing-task-replication-state':
+            return TestUtils.load_test_file_as_element('rpc_responses/get_protocol_replication_state.xml')
+        elif args[1].tag == 'get-pic-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_pic_info_as_xml.xml')
+        elif args[1].tag == 'get-software-information':
+            return TestUtils.ShowJunosVersion.get_version()
+        elif args[1].tag == 'get-vmhost-version-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_vmhost_version.xml')
+        elif args[1].tag == 'get-isis-adjacency-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_isis_adjacency_information.xml')
+        elif args[1].tag == 'file-copy':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_configuration_in_set_format.xml')
+        elif args[1].tag == 'get-chassis-inventory':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_chassis_hardware_as_xml.xml')
+        elif args[1].tag == 'get-subscribers':
+            return TestUtils.ShowSubscribersMockerSuccess.get_subscribers()
+        elif args[1].tag == 'get-bgp-summary-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_bgp_peers_by_group.xml')
+        elif args[1].tag == 'get-interface-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_interface_info_terse_as_xml.xml')
+        elif args[1].tag == 'get-ldp-session-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_ldp_session_info_as_xml.xml')
+        elif args[1].tag == 'get-bfd-session-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_bfd_session_info_as_xml.xml')
+        elif args[1].tag == 'get-l2ckt-connection-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_l2_circuit_info_as_xml.xml')
+        elif args[1].tag == 'get-route-summary-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_route_summary_as_xml.xml')
+        elif args[1].tag == 'request-vmhost-package-add':
+            return TestUtils.do_nothing()
+        elif args[1].tag == 'request-vmhost-reboot':
+            return TestUtils.do_nothing()
+        elif args[1].tag == 'request-vmhost-package-validate' and args[1].attrib == {'format': 'text'}:
+            return TestUtils.load_test_file_as_etree('rpc_responses/request_vmhost_package_validate.xml')
+        elif args[1].tag == 'request-chassis-routing-engine-switch':
+            return TestUtils.load_test_file_as_etree('rpc_responses/request_re_switchover.xml')
+        else:
+            assert False
+
+    @staticmethod
+    def get_device_info_re_status_fail(*args, **kwargs):
+        if args[1].tag == 'get-configuration':
+            return TestUtils.ShowConfigMockerSuccess.get_config()
+        elif args[1].tag == 'get-alarm-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_chassis_alarm_information_none_as_xml.xml')
+        elif args[1].tag == 'get-route-engine-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_re_info_bad_status.xml')
+        elif args[1].tag == 'get-routing-task-replication-state':
+            return TestUtils.load_test_file_as_element('rpc_responses/get_protocol_replication_state.xml')
+        elif args[1].tag == 'get-pic-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_pic_info_as_xml.xml')
+        elif args[1].tag == 'get-software-information':
+            return TestUtils.ShowJunosVersion.get_version()
+        elif args[1].tag == 'get-vmhost-version-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_vmhost_version.xml')
+        elif args[1].tag == 'get-isis-adjacency-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_isis_adjacency_information.xml')
+        elif args[1].tag == 'file-copy':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_configuration_in_set_format.xml')
+        elif args[1].tag == 'get-chassis-inventory':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_chassis_hardware_as_xml.xml')
+        elif args[1].tag == 'get-subscribers':
+            return TestUtils.ShowSubscribersMockerSuccess.get_subscribers()
+        elif args[1].tag == 'get-bgp-summary-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_bgp_peers_by_group.xml')
+        elif args[1].tag == 'get-interface-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_interface_info_terse_as_xml.xml')
+        elif args[1].tag == 'get-ldp-session-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_ldp_session_info_as_xml.xml')
+        elif args[1].tag == 'get-bfd-session-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_bfd_session_info_as_xml.xml')
+        elif args[1].tag == 'get-l2ckt-connection-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_l2_circuit_info_as_xml.xml')
+        elif args[1].tag == 'get-route-summary-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_route_summary_as_xml.xml')
         else:
             assert False

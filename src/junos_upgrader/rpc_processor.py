@@ -107,6 +107,7 @@ class RpcProcessor:
             error = f'\u274C ERROR: Unable to get configuration. Exception: {e}'
             self.logger.error(error)
             self.upgrade_error_log.append(error)
+            # raise ConfigGetError
 
     def record_chassis_hardware(self, record: dict):
         self.logger.info('Recording chassis hardware')
@@ -178,16 +179,21 @@ class RpcProcessor:
             self.logger.error(error)
             self.upgrade_error_log.append(error)
 
-    def verify_re_mastership(self, slot: int):
+    def verify_re_mastership(self, slot: int, retry: bool = True) -> bool:
         self.logger.info(f'Verifying RE{str(slot)} is master')
         try:
             for i in range(1, self.connection_retries + 1):
                 self.logger.info(f'Checking if RE{str(slot)} is master. Attempt {i} of {self.connection_retries}')
                 re_info = self.dev.show_chassis_routing_engine(slot=str(slot))
                 state = re_info.find('route-engine/mastership-state').text
-                if state != 'master':
+                if state != 'master' and retry:
                     self.logger.info(f'RE{str(slot)} is not yet master. Re-trying in 30 seconds')
                     time.sleep(30)
+                if state != 'master' and not retry:
+                    error = f'\u274C ERROR: RE{str(slot)} is not master'
+                    self.logger.error(error)
+                    self.upgrade_error_log.append(error)
+                    break
                 else:
                     self.logger.info(f'RE{str(slot)} is master. \u2705')
                     return True
@@ -816,7 +822,7 @@ class RpcProcessor:
         try:
             with Config(dev=self.dev.device, mode=mode) as cu:
                 cu.load(path=path, format='set', ignore_warning='statement not found')
-                print('Loaded ok')
+                self.logger.info('Loaded ok')
                 cu.commit(sync=True)
                 self.logger.info('Config loaded and committed successfully. \u2705')
         except ConfigLoadError as e:
