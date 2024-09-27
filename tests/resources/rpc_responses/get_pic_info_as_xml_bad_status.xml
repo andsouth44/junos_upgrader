@@ -1,0 +1,17 @@
+<fpc-information>
+    <fpc>
+        <slot>1</slot>
+        <state>Online</state>
+        <description>LC2103</description>
+        <pic>
+            <pic-slot>0</pic-slot>
+            <pic-state>Offline</pic-state>
+            <pic-type>6xQSFPP</pic-type>
+        </pic>
+        <pic>
+            <pic-slot>1</pic-slot>
+            <pic-state>Online</pic-state>
+            <pic-type>MIC1</pic-type>
+        </pic>
+    </fpc>
+</fpc-information>

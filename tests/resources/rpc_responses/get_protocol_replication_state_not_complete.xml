@@ -1,0 +1,18 @@
+<task-replication-state>
+    <task-gres-state>Enabled</task-gres-state>
+    <task-re-mode>Master</task-re-mode>
+    <task-protocol-replication-name>OSPF</task-protocol-replication-name>
+    <task-protocol-replication-state>Complete</task-protocol-replication-state>
+    <task-protocol-replication-name>BGP</task-protocol-replication-name>
+    <task-protocol-replication-state>Complete</task-protocol-replication-state>
+    <task-protocol-replication-name>IS-IS</task-protocol-replication-name>
+    <task-protocol-replication-state>Enabled</task-protocol-replication-state>
+    <task-protocol-replication-name>MPLS</task-protocol-replication-name>
+    <task-protocol-replication-state>Complete</task-protocol-replication-state>
+    <task-protocol-replication-name>RSVP</task-protocol-replication-name>
+    <task-protocol-replication-state>Complete</task-protocol-replication-state>
+    <task-protocol-replication-name>LDP</task-protocol-replication-name>
+    <task-protocol-replication-state>Complete</task-protocol-replication-state>
+    <task-protocol-replication-name>EVPN</task-protocol-replication-name>
+    <task-protocol-replication-state>Complete</task-protocol-replication-state>
+</task-replication-state>

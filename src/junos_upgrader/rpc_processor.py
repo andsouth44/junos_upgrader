@@ -351,19 +351,25 @@ class RpcProcessor:
             slots = []
             states = []
             pic_info = self.dev.show_chassis_fpc_pic_status()
-            slots = [slots.append(slot.text) for slot in pic_info.findall('fpc/pic/slot')]
-            states = [states.append(state.text) for state in pic_info.findall('fpc/pic/pic-state')]
+
+            # for slot in pic_info.findall('fpc/pic/pic-slot'):
+            #     slots.append(int(slot.text))
+            # for state in pic_info.findall('fpc/pic/pic-state'):
+            #     states.append(state.text)
+
+            slots = [slot.text for slot in pic_info.findall('fpc/pic/pic-slot')]
+            states = [state.text for state in pic_info.findall('fpc/pic/pic-state')]
             state_dict = dict(zip(slots, states))
 
             state_error = False
             for slot, state in state_dict.items():
                 if state != 'Online':
-                    error = f'\u274C ERROR: All PICs should be online. PIC in slot {slot} is {state}'
+                    error = f'\u274C ERROR: All PICs should be Online. PIC in slot {slot} is {state}'
                     self.logger.error(error)
                     self.upgrade_error_log.append(error)
                     state_error = True
             if not state_error:
-                self.logger.info('All PICs are online. \u2705')
+                self.logger.info('All PICs are Online. \u2705')
                 return True
             else:
                 return False

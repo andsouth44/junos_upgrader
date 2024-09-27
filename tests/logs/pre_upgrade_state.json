@@ -143,7 +143,7 @@
             "fpc_state": "Online",
             "fpc_description": "LC2103",
             "pic_slot": "0",
-            "pic_state": "Online",
+            "pic_state": "Offline",
             "pic_description": "6xQSFPP"
         },
         {
