@@ -179,21 +179,21 @@ class RpcProcessor:
             self.logger.error(error)
             self.upgrade_error_log.append(error)
 
-    def verify_re_mastership(self, slot: int, retry: bool = True) -> bool:
+    def verify_re_mastership(self, slot: int, tries: int) -> bool:
         self.logger.info(f'Verifying RE{str(slot)} is master')
         try:
-            for i in range(1, self.connection_retries + 1):
+            for i in range(1, tries + 1):
                 self.logger.info(f'Checking if RE{str(slot)} is master. Attempt {i} of {self.connection_retries}')
                 re_info = self.dev.show_chassis_routing_engine(slot=str(slot))
                 state = re_info.find('route-engine/mastership-state').text
-                if state != 'master' and retry:
+                if state != 'master':
+                    if i == 1:
+                        error = f'\u274C ERROR: RE{str(slot)} is not master'
+                        self.logger.error(error)
+                        self.upgrade_error_log.append(error)
+                        break
                     self.logger.info(f'RE{str(slot)} is not yet master. Re-trying in 30 seconds')
                     time.sleep(30)
-                if state != 'master' and not retry:
-                    error = f'\u274C ERROR: RE{str(slot)} is not master'
-                    self.logger.error(error)
-                    self.upgrade_error_log.append(error)
-                    break
                 else:
                     self.logger.info(f'RE{str(slot)} is master. \u2705')
                     return True

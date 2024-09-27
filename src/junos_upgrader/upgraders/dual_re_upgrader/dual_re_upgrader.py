@@ -151,7 +151,7 @@ def dual_re_upgrade_upgrader():
     rpc_processor_re0.verify_no_chassis_alarms()
 
     # Verify RE0 is Master
-    rpc_processor_re0.verify_re_mastership(slot=0, retry=False)
+    rpc_processor_re0.verify_re_mastership(slot=0, tries=1)
 
     # verify RE0 status
     status = rpc_processor_re0.verify_re_status(slot=0)
@@ -347,7 +347,7 @@ def dual_re_upgrade_upgrader():
     rpc_processor_re0.countdown_timer(post_switchover_delay)
 
     # Verify RE1 is Master
-    if not rpc_processor_re1.verify_re_mastership(slot=1):
+    if not rpc_processor_re1.verify_re_mastership(slot=1, tries=connection_retries):
         raise ReSwitchoverError
 
     logger.info('********** UPGRADING RE0 **********')
@@ -393,7 +393,7 @@ def dual_re_upgrade_upgrader():
     rpc_processor_re1.countdown_timer(post_switchover_delay)
 
     # Verify RE0 is Master
-    if not rpc_processor_re0.verify_re_mastership(slot=0):
+    if not rpc_processor_re0.verify_re_mastership(slot=0, tries=connection_retries):
         raise ReSwitchoverError
 
     logger.info(f'Waiting {post_script_completion_delay} seconds for convergence after switchover')
