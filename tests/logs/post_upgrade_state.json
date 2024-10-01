@@ -58,8 +58,8 @@
         }
     ],
     "subscriber-count-per-type": {
-        "pppoe": 4,
-        "vlan": 9,
+        "vlan": 10,
+        "pppoe": 5,
         "dhcp": 10
     },
     "isis-adjacency-info": [

@@ -57,6 +57,11 @@
             "description": "JNP FAN 3RU"
         }
     ],
+    "subscriber-count-per-type": {
+        "vlan": 10,
+        "pppoe": 5,
+        "dhcp": 10
+    },
     "isis-adjacency-info": [
         {
             "interface": "ae17.100",
@@ -143,7 +148,7 @@
             "fpc_state": "Online",
             "fpc_description": "LC2103",
             "pic_slot": "0",
-            "pic_state": "Offline",
+            "pic_state": "Online",
             "pic_description": "6xQSFPP"
         },
         {

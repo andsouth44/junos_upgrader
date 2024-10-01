@@ -16,10 +16,11 @@ class TestUtils:
 
     @staticmethod
     def get_test_name():
+        cwd = os.path.dirname(os.path.abspath(__file__))
         current_frame = inspect.currentframe()
         outer_frames = inspect.getouterframes(current_frame)
         for frame_info in outer_frames:
-            if frame_info.filename == '/Users/southarda/Library/CloudStorage/Dropbox/SW_Projects/junos_upgrader/tests/test_dual_re_upgrade_processor.py':
+            if frame_info.filename == f'{cwd}/test_dual_re_upgrade_processor.py':
                 return frame_info.function
 
     class MockArgs:
@@ -172,6 +173,14 @@ class TestUtils:
         return True
 
     @staticmethod
+    def return_fail(*args, **kwargs) -> bool:
+        return False
+
+    @staticmethod
+    def return_none(*args, **kwargs) -> None:
+        return None
+
+    @staticmethod
     def set_device_connected(dev) -> None:
         dev.connected = True
 
@@ -203,6 +212,10 @@ class TestUtils:
         return TestUtils.load_test_file('rpc_responses/get_re_files.json')
 
     @staticmethod
+    def get_re_files_no_new_package(*args, **kwargs):
+        return TestUtils.load_test_file('rpc_responses/get_re_files_no_new_package.json')
+
+    @staticmethod
     def get_device_info(*args, **kwargs):
         calling_test_name = TestUtils.get_test_name()
         if (args[1].tag == 'get-configuration'
@@ -216,6 +229,9 @@ class TestUtils:
         elif (args[1].tag == 'get-alarm-information'
               and calling_test_name == 'test_given_upgrade_fail_when_chassis_alarm_then_raise_sysexit_and_chassis_alarm_error'):
             return TestUtils.load_test_file_as_etree('rpc_responses/get_chassis_alarm_information_as_xml.xml')
+        elif (args[1].tag == 'get-alarm-information'
+              and calling_test_name == 'test_given_upgrade_fail_when_unable_to_record_chassis_alarms_then_raise_sysexit_and_get_chassis_alarms_error'):
+            return TestUtils.return_fail()
         elif args[1].tag == 'get-alarm-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_chassis_alarm_information_none_as_xml.xml')
         elif (args[1].tag == 'get-route-engine-information'
@@ -230,42 +246,86 @@ class TestUtils:
         elif (args[1].tag == 'get-route-engine-information'
               and calling_test_name == 'test_given_upgrade_fail_when_re_cpu_util_high_then_raise_sysexit_and_re_cpu_fail_error'):
             return TestUtils.load_test_file_as_etree('rpc_responses/get_re_info_bad_cpu.xml')
+        elif (args[1].tag == 'get-route-engine-information'
+              and calling_test_name == 'test_given_upgrade_fail_when_incorrect_re_model_then_raise_sysexit_and_re_model_error'):
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_re_info_bad_model.xml')
         elif args[1].tag == 'get-route-engine-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_re_info.xml')
         elif (args[1].tag == 'get-routing-task-replication-state'
               and calling_test_name == 'test_given_upgrade_fail_when_replication_not_complete_then_raise_sysexit_and_replication_not_complete_error'):
             return TestUtils.load_test_file_as_etree('rpc_responses/get_protocol_replication_state_not_complete.xml')
+        elif (args[1].tag == 'get-routing-task-replication-state'
+              and calling_test_name == 'test_given_upgrade_fail_when_unable_to_record_replication_state_then_raise_sysexit_and_get_replication_state_error'):
+            return TestUtils.return_none()
         elif args[1].tag == 'get-routing-task-replication-state':
             return TestUtils.load_test_file_as_element('rpc_responses/get_protocol_replication_state.xml')
         elif (args[1].tag == 'get-pic-information'
               and calling_test_name == 'test_given_upgrade_fail_when_pic_status_fail_then_raise_sysexit_and_pic_status_error'):
             return TestUtils.load_test_file_as_etree('rpc_responses/get_pic_info_as_xml_bad_status.xml')
+        elif (args[1].tag == 'get-pic-information'
+              and calling_test_name == 'test_given_upgrade_fail_when_unable_to_record_pic_info_then_raise_sysexit_and_get_pic_info_error'):
+            return TestUtils.return_none()
         elif args[1].tag == 'get-pic-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_pic_info_as_xml.xml')
+        elif (args[1].tag == 'get-software-information'
+              and calling_test_name == 'test_given_upgrade_fail_when_active_sw_ver_incorrect_then_raise_sysexit_and_sw_ver_error'):
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_software_information_new.xml')
         elif args[1].tag == 'get-software-information':
             return TestUtils.ShowJunosVersion.get_version()
+        elif (args[1].tag == 'get-vmhost-version-information'
+              and calling_test_name == 'test_given_upgrade_fail_when_incorrect_number_of_disks_on_re_then_raise_sysexit_and_number_of_disks_error'):
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_vmhost_version_one_disk.xml')
         elif args[1].tag == 'get-vmhost-version-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_vmhost_version.xml')
+        elif (args[1].tag == 'get-isis-adjacency-information'
+              and calling_test_name == 'test_given_upgrade_fail_when_incorrect_number_of_isis_adjacencies_then_raise_sysexit_and_number_of_isis_adjacencies_error'):
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_isis_adjacency_information_one_adj.xml')
+        elif (args[1].tag == 'get-isis-adjacency-information'
+              and calling_test_name == 'test_given_upgrade_fail_when_unable_to_record_isis_adjacencies_then_raise_sysexit_and_get_isis_adjacencies_error'):
+            return TestUtils.return_none()
         elif args[1].tag == 'get-isis-adjacency-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_isis_adjacency_information.xml')
-        elif args[1].tag == 'file-copy':
-            return TestUtils.load_test_file_as_etree('rpc_responses/get_configuration_in_set_format.xml')
+        elif (args[1].tag == 'get-chassis-inventory'
+              and calling_test_name == 'test_given_upgrade_fail_when_unable_to_record_chassis_inventory_then_raise_sysexit_and_record_chassis_inventory_error'):
+            return TestUtils.return_none()
         elif args[1].tag == 'get-chassis-inventory':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_chassis_hardware_as_xml.xml')
-        elif (args[1].tag == 'get-subscribers' and calling_test_name == 'test_given_successful_upgrade_when_diff_in_config_and_state_then_return_config_and_state_warning_messages'):
+        elif (args[1].tag == 'get-subscribers'
+              and calling_test_name == 'test_given_successful_upgrade_when_diff_in_config_and_state_then_return_config_and_state_warning_messages'):
             return TestUtils.ShowSubscribersMockerWarnings.get_subscribers()
+        elif (args[1].tag == 'get-subscribers'
+              and calling_test_name == 'test_given_upgrade_fail_when_unable_to_record_subscribers_then_raise_sysexit_and_get_subscribers_error'):
+            return TestUtils.return_none()
         elif args[1].tag == 'get-subscribers':
             return TestUtils.ShowSubscribersMockerSuccess.get_subscribers()
+        elif (args[1].tag == 'get-bgp-summary-information'
+              and calling_test_name == 'test_given_upgrade_fail_when_unable_to_record_bgp_summary_then_raise_sysexit_and_get_bgp_summary_error'):
+            return TestUtils.return_none()
         elif args[1].tag == 'get-bgp-summary-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_bgp_peers_by_group.xml')
+        elif (args[1].tag == 'get-interface-information'
+              and calling_test_name == 'test_given_upgrade_fail_when_unable_to_record_interface_state_then_raise_sysexit_and_get_interface_state_error'):
+            return TestUtils.return_none()
         elif args[1].tag == 'get-interface-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_interface_info_terse_as_xml.xml')
+        elif (args[1].tag == 'get-ldp-session-information'
+              and calling_test_name == 'test_given_upgrade_fail_when_unable_to_record_ldp_session_info_then_raise_sysexit_and_get_ldp_session_info_error'):
+            return TestUtils.return_none()
         elif args[1].tag == 'get-ldp-session-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_ldp_session_info_as_xml.xml')
+        elif (args[1].tag == 'get-bfd-session-information'
+              and calling_test_name == 'test_given_upgrade_fail_when_unable_to_record_bfd_session_info_then_raise_sysexit_and_get_bfd_session_info_error'):
+            return TestUtils.return_none()
         elif args[1].tag == 'get-bfd-session-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_bfd_session_info_as_xml.xml')
+        elif (args[1].tag == 'get-l2ckt-connection-information'
+              and calling_test_name == 'test_given_upgrade_fail_when_unable_to_record_l2ckt_info_then_raise_sysexit_and_get_l2ckt_info_error'):
+            return TestUtils.return_none()
         elif args[1].tag == 'get-l2ckt-connection-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_l2_circuit_info_as_xml.xml')
+        elif (args[1].tag == 'get-route-summary-information'
+              and calling_test_name == 'test_given_upgrade_fail_when_unable_to_record_route_summary_then_raise_sysexit_and_get_route_summary_error'):
+            return TestUtils.return_none()
         elif args[1].tag == 'get-route-summary-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_route_summary_as_xml.xml')
         elif args[1].tag == 'request-vmhost-package-add':

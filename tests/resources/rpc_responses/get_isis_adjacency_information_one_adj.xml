@@ -1,0 +1,9 @@
+<isis-adjacency-information>
+    <isis-adjacency>
+        <interface-name>ae17.100</interface-name>
+        <system-name>ABCD28394749</system-name>
+        <level>1</level>
+        <adjacency-state>Up</adjacency-state>
+        <holdtime>27</holdtime>
+    </isis-adjacency>
+</isis-adjacency-information>

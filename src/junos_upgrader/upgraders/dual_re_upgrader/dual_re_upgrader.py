@@ -5,7 +5,7 @@ Created by Andrew Southard <southarda@juniper.net> <andsouth44@gmail.com>
 
 import os, sys, logging, argparse, json
 import jnpr.junos
-from rpc_processor import RpcProcessor, ReSwitchoverError, JunosInstallError
+from rpc_processor import RpcProcessor, JunosReSwitchoverError, JunosInstallError, JunosRpcProcessorInitError
 from helpers import Helpers
 
 
@@ -119,8 +119,8 @@ def dual_re_upgrade_upgrader():
 
     logger.info('********** RUNNING RE0 PRE-CHECKS **********')
 
-    # Instantiate instance of UpgradeUtils class for RE0
-    logger.debug('Create instance of UpgradeUtils class for re0')
+    # Instantiate instance of RpcProcessor class for RE0
+    logger.debug('Create instance of RpcProcessor class for re0')
     try:
         rpc_processor_re0 = RpcProcessor(
                 logger=logger,
@@ -134,7 +134,8 @@ def dual_re_upgrade_upgrader():
     except Exception as e:
         error = f'Unable to create instance of UpgradeUtils: {e}'
         logger.error(error)
-        sys.exit()
+        upgrade_error_log.append(error)
+        raise JunosReSwitchoverError(e)
 
     logger.debug(f'Juniper PyEZ Version: {jnpr.junos.__version__}')
     logger.debug(rpc_processor_re0)
@@ -228,8 +229,8 @@ def dual_re_upgrade_upgrader():
 
     logger.info('********** RUNNING RE1 PRE-CHECKS **********')
 
-    # Instantiate instance of UpgradeUtils class for RE1
-    logger.debug('Create instance of UpgradeUtils class for re1')
+    # Instantiate instance of RpcProcessor class for RE1
+    logger.debug('Create instance of RpcProcessor class for re1')
     try:
         rpc_processor_re1 = RpcProcessor(
                 logger=logger,
@@ -348,7 +349,7 @@ def dual_re_upgrade_upgrader():
 
     # Verify RE1 is Master
     if not rpc_processor_re1.verify_re_mastership(slot=1, tries=connection_retries):
-        raise ReSwitchoverError
+        raise JunosReSwitchoverError
 
     logger.info('********** UPGRADING RE0 **********')
 
@@ -394,7 +395,7 @@ def dual_re_upgrade_upgrader():
 
     # Verify RE0 is Master
     if not rpc_processor_re0.verify_re_mastership(slot=0, tries=connection_retries):
-        raise ReSwitchoverError
+        raise JunosReSwitchoverError
 
     logger.info(f'Waiting {post_script_completion_delay} seconds for convergence after switchover')
     rpc_processor_re0.countdown_timer(post_script_completion_delay)

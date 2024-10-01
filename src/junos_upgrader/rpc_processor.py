@@ -21,13 +21,13 @@ class JunosInstallError(JunosUpgradeError):
     """
 
 
-class ConfigApplyError(JunosUpgradeError):
+class JunosConfigApplyError(JunosUpgradeError):
     """
     Parent class for all config apply related exceptions
     """
 
 
-class ConfigRescueError(JunosUpgradeError):
+class JunosConfigRescueError(JunosUpgradeError):
     """
     Parent class for all rescue config related exceptions
     """
@@ -45,13 +45,18 @@ class JunosValidationError(JunosUpgradeError):
     """
 
 
-class ConfigValidationError(JunosUpgradeError):
+class JunosConfigValidationError(JunosUpgradeError):
     """
     Parent class for all validation related exceptions
     """
 
 
-class ReSwitchoverError(JunosUpgradeError):
+class JunosReSwitchoverError(JunosUpgradeError):
+    """
+    Parent class for all RE switchover related exceptions
+    """
+
+class JunosRpcProcessorInitError(JunosUpgradeError):
     """
     Parent class for all RE switchover related exceptions
     """
@@ -473,8 +478,8 @@ class RpcProcessor:
                     level = isis_adj.find('level').text
                     state = isis_adj.find('adjacency-state').text
                     isis_list.append({'interface': interface, 'level': level, 'state': state})
-            record['isis-adjacency-info'] = isis_list
-            self.logger.info('ISIS adjacency info recorded. \u2705')
+                record['isis-adjacency-info'] = isis_list
+                self.logger.info('ISIS adjacency info recorded. \u2705')
         except Exception as e:
             error = f'\u274C ERROR: Unable to save ISIS adjacency info to capture file. Exception: {e}'
             self.logger.error(error)
@@ -836,11 +841,11 @@ class RpcProcessor:
                      f' that you are trying to apply to the device. Please check the syntax of the'
                      f' commands. Exception: {e}')
             self.logger.error(error)
-            raise ConfigApplyError
+            raise JunosConfigApplyError
         except Exception as e:
             error = f'\u274C ERROR: Unable to load config. Exception: {e}'
             self.logger.error(error)
-            raise ConfigApplyError
+            raise JunosConfigApplyError
 
     def create_rescue_config(self, mode: str):
         self.logger.info('Creating rescue config')
@@ -851,7 +856,7 @@ class RpcProcessor:
         except Exception as e:
             error = f'\u274C ERROR: Unable to create rescue config. Exception: {e}'
             self.logger.error(error)
-            raise ConfigRescueError
+            raise JunosConfigRescueError
 
     def install_junos_on_device(self, junos_package_path: str, new_junos_package: str, re_number: int):
         self.logger.debug(f'Inputs are - junos_package_path: {junos_package_path}, new_junos_package: {new_junos_package}, re_number: {re_number}')
@@ -938,7 +943,7 @@ class RpcProcessor:
                 error = f'\u274C ERROR: RE switchover initiation failed'
                 self.logger.error(error)
                 self.upgrade_error_log.append(error)
-                raise ReSwitchoverError
+                raise JunosReSwitchoverError
         except Exception as e:
             error = f"\u274C ERROR: Unable to initiate RE switchover. Exception: {e}"
             self.logger.error(error)

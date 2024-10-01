@@ -1,0 +1,16 @@
+<output>
+    Current root details,           Device sda, Label: jrootb_P, Partition: sda4
+    Current boot disk: Primary
+    Current root set: b
+    UEFI    Version: CBEP_P_SUM1_0
+
+    Primary Disk, Upgrade Time: Tue Aug 27 17:38:51 EDT 2024
+
+    Version: set p
+    VMHost Version: 7
+    VMHost Root: vmhost-x86_64-22.4R3_builder
+    VMHost Core: vmhost-core-x86-64-22.4R3.25
+    kernel: 5
+    Junos Disk: junos-install-mx-x86-64-22.4R3.25
+
+</output>
