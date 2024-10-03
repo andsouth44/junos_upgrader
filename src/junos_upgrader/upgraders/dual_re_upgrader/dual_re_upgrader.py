@@ -5,7 +5,7 @@ Created by Andrew Southard <southarda@juniper.net> <andsouth44@gmail.com>
 
 import os, sys, logging, argparse, json
 import jnpr.junos
-from rpc_processor import RpcProcessor, JunosReSwitchoverError, JunosInstallError, JunosRpcProcessorInitError
+from rpc_processor import RpcProcessor, JunosReSwitchoverError, JunosPackageInstallError, JunosRpcProcessorInitError
 from helpers import Helpers
 
 
@@ -51,6 +51,7 @@ def dual_re_upgrade_upgrader():
     post_switchover_delay: int = test_params.get("POST_SWITCHOVER_DELAY")
     post_script_completion_delay: int = test_params.get("POST_SCRIPT_COMPLETION_DELAY")
     connection_retries: int = test_params.get("CONNECTION_RETRIES")
+    connection_retry_interval: int = test_params.get("CONNECTION_RETRY_INTERVAL")
 
     # process input arguments
     parser = argparse.ArgumentParser(description="A Junos upgrade script for dual RE MX")
@@ -130,12 +131,13 @@ def dual_re_upgrade_upgrader():
                 username=user,
                 password=pw,
                 port=port,
-                connection_retries=connection_retries)
+                connection_retries=connection_retries,
+                connection_retry_interval=connection_retry_interval)
     except Exception as e:
         error = f'Unable to create instance of UpgradeUtils: {e}'
         logger.error(error)
         upgrade_error_log.append(error)
-        raise JunosReSwitchoverError(e)
+        raise JunosRpcProcessorInitError(e)
 
     logger.debug(f'Juniper PyEZ Version: {jnpr.junos.__version__}')
     logger.debug(rpc_processor_re0)
@@ -240,7 +242,8 @@ def dual_re_upgrade_upgrader():
                 username=user,
                 password=pw,
                 port=port,
-                connection_retries=connection_retries)
+                connection_retries=connection_retries,
+                connection_retry_interval=connection_retry_interval)
     except Exception as e:
         error = f'Unable to create instance of UpgradeUtils: {e}'
         logger.error(error)
@@ -339,7 +342,7 @@ def dual_re_upgrade_upgrader():
 
     # verify that new Junos is now running on RE1
     if not rpc_processor_re1.verify_active_junos_version(expected_junos=new_junos_short, slot=1):
-        raise JunosInstallError(f'RE1 is not running the expected Junos version {new_junos_short}')
+        raise JunosPackageInstallError(f'RE1 is not running the expected Junos version {new_junos_short}')
 
     logger.info('Initiating switchover to RE1 as master')
     rpc_processor_re0.re_switchover()
@@ -382,7 +385,7 @@ def dual_re_upgrade_upgrader():
 
     # verify that new Junos is now running on RE0
     if not rpc_processor_re0.verify_active_junos_version(expected_junos=new_junos_short, slot=0):
-        raise JunosInstallError(f'RE0 is not running the expected Junos version {new_junos_short}')
+        raise JunosPackageInstallError(f'RE0 is not running the expected Junos version {new_junos_short}')
 
     if not rpc_processor_re1.dev.device.connected:
         rpc_processor_re1.dev.open()

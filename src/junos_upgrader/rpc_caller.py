@@ -8,15 +8,18 @@ from jnpr.junos.utils.fs import FS
 from lxml import etree
 import time
 
+from junos_upgrader_exceptions import JunosConnectError
+
 
 class RpcCaller:
-    def __init__(self, host, username, password, port, logger, connection_retries=20):
+    def __init__(self, host, username, password, port, logger, connection_retries=20, connection_retry_interval=5):
         self.host = host
         self.username = username
         self.password = password
         self.port = port
         self.logger = logger
         self.connection_retries = connection_retries
+        self.connection_retry_interval = connection_retry_interval
         self.device = Device(host=host, user=username, password=password, port=port, conn_open_timeout=30, normalize=True)
         self.fs = FS(self.device)
 
@@ -46,9 +49,11 @@ class RpcCaller:
                     self.logger.info(f'Connected to {self.host} \u2705')
                     return self
             except Exception as e:
-                error = f'Cannot connect to {self.host}. Re-trying in 5 seconds. Error: {e}'
-                time.sleep(5)
+                error = f'Cannot connect to {self.host}. Re-trying in {self.connection_retry_interval} seconds. Error: {e}'
+                time.sleep(self.connection_retry_interval)
                 self.logger.info(error)
+        error = f'Cannot connect to {self.host}. Maximum number of retries has been reached'
+        raise JunosConnectError(error)
 
     def close(self):
         self.device.close()

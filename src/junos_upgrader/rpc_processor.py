@@ -2,64 +2,11 @@
 Copyright (c) Juniper Networks 2024
 Created by Andrew Southard <southarda@juniper.net> <andsouth44@gmail.com>
 """
-import json
 import re, time, sys, difflib
 from lxml import etree
 from jnpr.junos.utils.config import Config, ConfigLoadError
 from rpc_caller import RpcCaller
-
-
-class JunosUpgradeError(Exception):
-    """
-    Parent class for all Junos Upgrade related exceptions
-    """
-
-
-class JunosInstallError(JunosUpgradeError):
-    """
-    Parent class for all Junos install related exceptions
-    """
-
-
-class JunosConfigApplyError(JunosUpgradeError):
-    """
-    Parent class for all config apply related exceptions
-    """
-
-
-class JunosConfigRescueError(JunosUpgradeError):
-    """
-    Parent class for all rescue config related exceptions
-    """
-
-
-class JunosRebootError(JunosUpgradeError):
-    """
-    Parent class for all reboot related exceptions
-    """
-
-
-class JunosValidationError(JunosUpgradeError):
-    """
-    Parent class for all junos validation related exceptions
-    """
-
-
-class JunosConfigValidationError(JunosUpgradeError):
-    """
-    Parent class for all validation related exceptions
-    """
-
-
-class JunosReSwitchoverError(JunosUpgradeError):
-    """
-    Parent class for all RE switchover related exceptions
-    """
-
-class JunosRpcProcessorInitError(JunosUpgradeError):
-    """
-    Parent class for all RE switchover related exceptions
-    """
+from junos_upgrader_exceptions import *
 
 
 class RpcProcessor:
@@ -72,6 +19,7 @@ class RpcProcessor:
         self.password = kwargs["password"]
         self.port = kwargs["port"]
         self.connection_retries = kwargs["connection_retries"]
+        self.connection_retry_interval = kwargs["connection_retry_interval"]
 
         self.dev = RpcCaller(
                 host=self.host,
@@ -79,7 +27,8 @@ class RpcProcessor:
                 password=self.password,
                 port=self.port,
                 logger=self.logger,
-                connection_retries=self.connection_retries)
+                connection_retries=self.connection_retries,
+                connection_retry_interval=self.connection_retry_interval)
 
         self.dev.open()
 
@@ -885,7 +834,7 @@ class RpcProcessor:
         except Exception as e:
             error = f'\u274C ERROR: Unable to install Junos. Exception: {e}'
             self.logger.error(error)
-            raise JunosInstallError
+            raise JunosPackageInstallError
 
     def reboot_re(self, re_number: int):
         self.logger.info(f'Initiating reboot of RE{re_number}.')

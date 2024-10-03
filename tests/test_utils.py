@@ -77,6 +77,10 @@ class TestUtils:
             cls.config_idx += 1
             return config_files
 
+        @classmethod
+        def reset(cls):
+            cls.config_idx = 0
+
     class ShowConfigMockerWarnings:
         def mock_file_load(file_name) -> etree.ElementTree:
             return etree.parse(Path(sys.path[0]).joinpath('resources', file_name))
@@ -91,6 +95,10 @@ class TestUtils:
             config_files = cls.config_files_to_be_returned[cls.config_idx]
             cls.config_idx += 1
             return config_files
+
+        @classmethod
+        def reset(cls):
+            cls.config_idx = 0
 
     class ShowSubscribersMockerSuccess:
         def mock_file_load(file_name) -> etree.ElementTree:
@@ -107,6 +115,10 @@ class TestUtils:
             cls.subscribers_idx += 1
             return subscribers_files
 
+        @classmethod
+        def reset(cls):
+            cls.subscribers_idx = 0
+
     class ShowSubscribersMockerWarnings:
         def mock_file_load(file_name) -> etree.ElementTree:
             return etree.parse(Path(sys.path[0]).joinpath('resources', file_name))
@@ -121,6 +133,10 @@ class TestUtils:
             subscribers_files = cls.subscribers_files_to_be_returned[cls.subscribers_idx]
             cls.subscribers_idx += 1
             return subscribers_files
+
+        @classmethod
+        def reset(cls):
+            cls.subscribers_idx = 0
 
     class ShowJunosVersion:
         def mock_file_load(file_name) -> etree.ElementTree:
@@ -143,6 +159,17 @@ class TestUtils:
         @classmethod
         def reset(cls):
             cls.version_idx = 0
+
+    @staticmethod
+    def mocker_resetter():
+        mockers = [TestUtils.ShowJunosVersion,
+                   TestUtils.ShowSubscribersMockerWarnings,
+                   TestUtils.ShowSubscribersMockerSuccess,
+                   TestUtils.ShowConfigMockerWarnings,
+                   TestUtils.ShowConfigMockerSuccess]
+
+        for mocker in mockers:
+            mocker.reset()
 
     @staticmethod
     def create_mock_inputs_json_and_test_params_json():
@@ -275,6 +302,9 @@ class TestUtils:
         elif (args[1].tag == 'get-vmhost-version-information'
               and calling_test_name == 'test_given_upgrade_fail_when_incorrect_number_of_disks_on_re_then_raise_sysexit_and_number_of_disks_error'):
             return TestUtils.load_test_file_as_etree('rpc_responses/get_vmhost_version_one_disk.xml')
+        elif (args[1].tag == 'get-vmhost-version-information'
+              and calling_test_name == 'test_given_upgrade_warning_when_junos_not_matching_on_partitions_then_warning_in_log'):
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_vmhost_version_not_matching.xml')
         elif args[1].tag == 'get-vmhost-version-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_vmhost_version.xml')
         elif (args[1].tag == 'get-isis-adjacency-information'
@@ -328,8 +358,14 @@ class TestUtils:
             return TestUtils.return_none()
         elif args[1].tag == 'get-route-summary-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_route_summary_as_xml.xml')
+        elif (args[1].tag == 'request-vmhost-package-add'
+              and calling_test_name == 'test_given_upgrade_fail_when_unable_to_load_package_then_raise_junos_install_error'):
+            return TestUtils.raise_exception()
         elif args[1].tag == 'request-vmhost-package-add':
             return TestUtils.do_nothing()
+        elif (args[1].tag == 'request-vmhost-reboot'
+              and calling_test_name == 'test_given_upgrade_fail_when_unable_to_reboot_then_raise_junos_package_reboot_error'):
+            return TestUtils.raise_exception()
         elif args[1].tag == 'request-vmhost-reboot':
             return TestUtils.do_nothing()
         elif args[1].tag == 'request-vmhost-package-validate' and args[1].attrib == {'format': 'text'}:
