@@ -13,8 +13,8 @@ from upgraders.dual_re_upgrader.dual_re_upgrader import dual_re_upgrade_upgrader
 from helpers import Helpers
 from jnpr.junos.utils.config import Config
 from test_utils import TestUtils
-from rpc_processor import (RpcProcessor, JunosRpcProcessorInitError, JunosConfigApplyError, JunosConfigRescueError,
-                           JunosPackageInstallError, JunosRebootError, JunosConnectError)
+from junos_upgrader_exceptions import *
+from rpc_processor import RpcProcessor
 from rpc_caller import RpcCaller
 
 
@@ -361,5 +361,15 @@ class TestUpgradeProcessor:
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
         message = ('❌ ERROR: Junos image: junos-install-mx-x86-64-22.4R3.25 does not exist on both partitions')
         dual_re_upgrade_upgrader()
+        assert message in caplog.text
+        TestUtils.mocker_resetter()
+
+    def test_given_upgrade_fail_when_device_re_switchover_fail_then_raise_junos_re_switchover_error(self, monkeypatch, caplog):
+        monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
+        monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
+        message = ('❌ ERROR: RE switchover initiation failed')
+        dual_re_upgrade_upgrader()
+        with pytest.raises(SystemExit):
+            dual_re_upgrade_upgrader()
         assert message in caplog.text
         TestUtils.mocker_resetter()

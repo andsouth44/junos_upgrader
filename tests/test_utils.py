@@ -370,6 +370,9 @@ class TestUtils:
             return TestUtils.do_nothing()
         elif args[1].tag == 'request-vmhost-package-validate' and args[1].attrib == {'format': 'text'}:
             return TestUtils.load_test_file_as_etree('rpc_responses/request_vmhost_package_validate.xml')
+        elif (args[1].tag == 'request-chassis-routing-engine-switch'
+              and calling_test_name == 'test_given_upgrade_fail_when_device_re_switchover_fail_then_raise_junos_re_switchover_error'):
+            return TestUtils.load_test_file_as_etree('rpc_responses/request_re_switchover_fail.xml')
         elif args[1].tag == 'request-chassis-routing-engine-switch':
             return TestUtils.load_test_file_as_etree('rpc_responses/request_re_switchover.xml')
         else:

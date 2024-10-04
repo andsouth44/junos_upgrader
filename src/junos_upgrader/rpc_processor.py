@@ -61,7 +61,6 @@ class RpcProcessor:
             error = f'\u274C ERROR: Unable to get configuration. Exception: {e}'
             self.logger.error(error)
             self.upgrade_error_log.append(error)
-            # raise ConfigGetError
 
     def record_chassis_hardware(self, record: dict):
         self.logger.info('Recording chassis hardware')
@@ -892,11 +891,12 @@ class RpcProcessor:
                 error = f'\u274C ERROR: RE switchover initiation failed'
                 self.logger.error(error)
                 self.upgrade_error_log.append(error)
-                raise JunosReSwitchoverError
+                return JunosReSwitchoverError
         except Exception as e:
             error = f"\u274C ERROR: Unable to initiate RE switchover. Exception: {e}"
             self.logger.error(error)
             self.upgrade_error_log.append(error)
+            raise JunosReSwitchoverError
 
     def request_vmhost_snapshot(self):
         self.logger.info('Creating vmhost snapshot. This may take several minutes:')

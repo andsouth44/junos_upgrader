@@ -51,6 +51,7 @@ class JunosRpcProcessorInitError(JunosUpgradeError):
     Parent class for all Rpc Processor Initialization exceptions
     """
 
+
 class JunosConnectError(JunosUpgradeError):
     """
     Parent class for all device connection exceptions
