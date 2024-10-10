@@ -42,6 +42,7 @@ class RpcProcessor:
                 f" password: xxxxxx,"
                 f" port: {self.port},"
                 f" connection_retries: {self.connection_retries},"
+                f" connection_retry_interval: {self.connection_retry_interval},"
                 f" DeviceRpc object: {self.dev})")
 
     def get_config_as_etree(self):
@@ -56,6 +57,7 @@ class RpcProcessor:
         try:
             config = self.dev.show_configuration(options={'database':'committed', 'format':'set'})
             config = etree.tostring(config, encoding='unicode', pretty_print='True')
+            config = config.replace("set", "\nset")  # etree response is missing \n's so need to add
             return config
         except Exception as e:
             error = f'\u274C ERROR: Unable to get configuration. Exception: {e}'
@@ -548,8 +550,11 @@ class RpcProcessor:
                         sub_type_counts[key] = 1
                     else:
                         sub_type_counts[key] += 1
-            record['subscriber-count-per-type'] = sub_type_counts
-            self.logger.info('Subscriber type count recorded. \u2705')
+                record['subscriber-count-per-type'] = sub_type_counts
+                self.logger.info('Subscriber type count recorded. \u2705')
+            else:
+                record['subscriber-count-per-type'] = 0
+                self.logger.info('Subscriber count is zero. \u2705')
         except Exception as e:
             error = f'\u274C ERROR: Unable to record subscriber count for each type. Exception: {e}'
             self.logger.error(error)

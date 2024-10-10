@@ -492,6 +492,11 @@ def dual_re_upgrade_upgrader():
 
     logger.info('********** COMPARING PRE & POST CONFIG **********')
 
+    print(repr(pre_upgrade_config))
+    print("###########")
+    print(repr(post_upgrade_config))
+
+
     rpc_processor_re0.compare_configs(pre_upgrade_config, post_upgrade_config)
 
     logger.info('********** COMPARING PRE & POST STATE **********')
