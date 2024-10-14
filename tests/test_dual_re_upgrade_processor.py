@@ -21,8 +21,7 @@ from rpc_caller import RpcCaller
 class TestUpgradeProcessor:
     @pytest.fixture(scope="function", autouse=True)
     def before(self, monkeypatch):
-        monkeypatch.setattr(Helpers, "create_inputs_json_and_test_params_json",
-                            TestUtils.create_mock_inputs_json_and_test_params_json)
+        monkeypatch.setattr(Helpers, "create_inputs_json", TestUtils.create_mock_inputs_json)
         monkeypatch.setattr(Helpers, "create_logger", TestUtils.create_mock_logger)
         monkeypatch.setattr(Device, 'open', TestUtils.set_device_connected)
         monkeypatch.setattr(Device, 'close', TestUtils.do_nothing)

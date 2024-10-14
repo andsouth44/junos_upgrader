@@ -5,7 +5,8 @@ Created by Andrew Southard <southarda@juniper.net> <andsouth44@gmail.com>
 
 import os, sys, logging, argparse, json
 import jnpr.junos
-from rpc_processor import RpcProcessor, JunosReSwitchoverError, JunosPackageInstallError, JunosRpcProcessorInitError
+from rpc_processor import RpcProcessor
+from junos_upgrader_exceptions import JunosPackageInstallError, JunosRpcProcessorInitError, JunosInputsError
 from helpers import Helpers
 
 
@@ -22,36 +23,46 @@ def dual_re_upgrade_upgrader():
         activate system commit fast-synchronize
         set chassis fpc 1 error major action reset-pfe
 
-    Insert your parameters in:
+    Insert your parameters in json files in:
 
-        dual_re_upgrader/inputs/USER_INPUTS.json
-        dual_re_upgrader/inputs/TEST_PARAMS.json
+        dual_re_upgrader/inputs/.....
 
     Independent IP connectivity to both REs is required.
 
     """
-    input_args, test_params = Helpers.create_inputs_json_and_test_params_json()
-    re0_host: str = input_args.get("RE0_HOST")
-    re1_host: str = input_args.get("RE1_HOST")
-    port: str = test_params.get("PORT")
-    user: str = input_args.get("USERNAME")
-    pw: str = input_args.get("PASSWORD")
-    active_junos: str = input_args.get("ACTIVE_JUNOS")
-    new_junos_short: str = input_args.get("NEW_JUNOS")
+
+    #  Create inputs_json dict by reading all json files in inputs folder
+    try:
+        inputs_json = Helpers.create_inputs_json()
+    except KeyError:
+        raise
+    except Exception as e:
+        raise JunosInputsError(e)
+
+    #  Extract input parameters from inputs_json dict
+    re0_host: str = inputs_json.get("RE0_HOST")
+    re1_host: str = inputs_json.get("RE1_HOST")
+    port: str = inputs_json.get("PORT")
+    user: str = inputs_json.get("USERNAME")
+    pw: str = inputs_json.get("PASSWORD")
+    active_junos: str = inputs_json.get("ACTIVE_JUNOS")
+    new_junos_short: str = inputs_json.get("NEW_JUNOS")
+    junos_package_path: str = inputs_json.get("JUNOS_PACKAGE_PATH")
+    logfile: str = inputs_json.get("LOGFILE")
+    config_file_to_backup: str = inputs_json.get("CONFIG_FILE_TO_BACKUP")
+    re_model: str = inputs_json.get("RE_MODEL")
+    min_isis_adj: int = inputs_json.get("MIN_ISIS_ADJ")
+    max_mem_utilization: int = inputs_json.get("MAX_MEM_UTILIZATION_PERCENT")
+    min_cpu_idle: int = inputs_json.get("MIN_CPU_IDLE_PERCENT")
+    post_reboot_delay: int = inputs_json.get("POST_REBOOT_DELAY")
+    post_switchover_delay: int = inputs_json.get("POST_SWITCHOVER_DELAY")
+    post_script_completion_delay: int = inputs_json.get("POST_SCRIPT_COMPLETION_DELAY")
+    connection_retries: int = inputs_json.get("CONNECTION_RETRIES")
+    connection_retry_interval: int = inputs_json.get("CONNECTION_RETRY_INTERVAL")
+
+    # derive additional junos package name parameters
     new_junos_package: str = f"junos-vmhost-install-mx-x86-64-{new_junos_short}.tgz"
     new_junos: str = f"junos-install-mx-x86-64-{new_junos_short}"
-    junos_package_path: str = test_params.get("JUNOS_PACKAGE_PATH")
-    logfile: str = test_params.get("LOGFILE")
-    config_file_to_backup: str = test_params.get("CONFIG_FILE_TO_BACKUP")
-    re_model: str = test_params.get("RE_MODEL")
-    min_isis_adj: int = test_params.get("MIN_ISIS_ADJ")
-    max_mem_utilization: int = test_params.get("MAX_MEM_UTILIZATION_PERCENT")
-    min_cpu_idle: int = test_params.get("MIN_CPU_IDLE_PERCENT")
-    post_reboot_delay: int = test_params.get("POST_REBOOT_DELAY")
-    post_switchover_delay: int = test_params.get("POST_SWITCHOVER_DELAY")
-    post_script_completion_delay: int = test_params.get("POST_SCRIPT_COMPLETION_DELAY")
-    connection_retries: int = test_params.get("CONNECTION_RETRIES")
-    connection_retry_interval: int = test_params.get("CONNECTION_RETRY_INTERVAL")
 
     # process input arguments
     parser = argparse.ArgumentParser(description="A Junos upgrade script for dual RE MX")

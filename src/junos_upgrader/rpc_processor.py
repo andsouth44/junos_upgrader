@@ -10,10 +10,10 @@ from junos_upgrader_exceptions import *
 
 
 class RpcProcessor:
-    def __init__(self, **kwargs):
-        self.logger = kwargs["logger"]
-        self.upgrade_error_log = kwargs["upgrade_error_log"]
-        self.upgrade_warning_log = kwargs["upgrade_warning_log"]
+    def __init__(self, logger, upgrade_error_log, upgrade_warning_log, **kwargs):
+        self.logger = logger
+        self.upgrade_error_log = upgrade_error_log
+        self.upgrade_warning_log = upgrade_warning_log
         self.host = kwargs["host"]
         self.username = kwargs["username"]
         self.password = kwargs["password"]

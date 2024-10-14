@@ -4,15 +4,35 @@ Created by Andrew Southard <southarda@juniper.net> <andsouth44@gmail.com>
 """
 
 from pathlib import Path
-import sys, json, logging
+import sys, json, logging, os
 
 
 class Helpers:
     @staticmethod
-    def create_inputs_json_and_test_params_json():
-        with open(Path(sys.path[0]).joinpath('src', 'junos_upgrader', 'upgraders', 'dual_re_upgrader', 'inputs', 'USER_INPUTS.json')) as inputs:
-            with open(Path(sys.path[0]).joinpath('src', 'junos_upgrader', 'upgraders', 'dual_re_upgrader', 'inputs', 'TEST_PARAMS.json')) as test_params:
-                return json.load(inputs), json.load(test_params)
+    def create_inputs_json() -> dict:
+        directory_path = Path(sys.path[0]).joinpath('inputs')
+        combined_data = {}
+
+        # Iterate over all files in the directory
+        for filename in os.listdir(directory_path):
+            # Check if the file has a .json suffix
+            if filename.endswith(".json"):
+                file_path = os.path.join(directory_path, filename)
+                print(f"Opening file: {file_path}")
+
+                # Open the .json file
+                with open(file_path, 'r') as json_file:
+                    try:
+                        data = json.load(json_file)
+                        for key, value in data.items():
+                            if key in combined_data:
+                                raise KeyError(f"Key {key} from {file_path} already exists")
+                        # if no duplicate keys, add data to combined data dict
+                        combined_data.update(data)
+                    except json.JSONDecodeError as e:
+                        print(f"Error parsing JSON in file {filename}: {e}")
+
+        return combined_data
 
     @staticmethod
     def create_logger(cwd, logfile):

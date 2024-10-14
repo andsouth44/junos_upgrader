@@ -56,3 +56,8 @@ class JunosConnectError(JunosUpgradeError):
     """
     Parent class for all device connection exceptions
     """
+
+class JunosInputsError(JunosUpgradeError):
+    """
+    Parent class for all inputs exceptions
+    """
