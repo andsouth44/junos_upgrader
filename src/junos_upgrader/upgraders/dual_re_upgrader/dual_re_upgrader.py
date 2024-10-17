@@ -6,28 +6,15 @@ Created by Andrew Southard <southarda@juniper.net> <andsouth44@gmail.com>
 import os, sys, logging, argparse, json
 import jnpr.junos
 from rpc_processor import RpcProcessor
-from junos_upgrader_exceptions import JunosPackageInstallError, JunosRpcProcessorInitError, JunosInputsError
+from junos_upgrader_exceptions import JunosPackageInstallError, JunosRpcProcessorInitError, JunosInputsError, JunosReSwitchoverError
 from helpers import Helpers
 
 
 def dual_re_upgrade_upgrader():
     """
-    This module is designed to upgrade the JunOS on MX series routers with dual REs
-    with the following redundancy features enabled:
-
-        activate chassis redundancy graceful-switchover
-        activate routing-options nonstop-routing
-        activate routing-options nsr-phantom-holdtime
-        activate system switchover-on-routing-crash
-        activate system commit synchronize
-        activate system commit fast-synchronize
-        set chassis fpc 1 error major action reset-pfe
-
-    Insert your parameters in json files in:
-
-        dual_re_upgrader/inputs/.....
-
-    Independent IP connectivity to both REs is required.
+    This upgrader is designed to upgrade the JunOS on MX series routers with dual REs
+    and redundancy features configured.
+    See README.md file for details.
 
     """
 
@@ -48,7 +35,7 @@ def dual_re_upgrade_upgrader():
     active_junos: str = inputs_json.get("ACTIVE_JUNOS")
     new_junos_short: str = inputs_json.get("NEW_JUNOS")
     junos_package_path: str = inputs_json.get("JUNOS_PACKAGE_PATH")
-    logfile: str = inputs_json.get("LOGFILE")
+    logfile_name: str = inputs_json.get("LOGFILE_NAME")
     config_file_to_backup: str = inputs_json.get("CONFIG_FILE_TO_BACKUP")
     re_model: str = inputs_json.get("RE_MODEL")
     min_isis_adj: int = inputs_json.get("MIN_ISIS_ADJ")
@@ -94,7 +81,7 @@ def dual_re_upgrade_upgrader():
 
     # initialize logging
     cwd = os.path.dirname(os.path.abspath(__file__))
-    formatter, file_handler, logger = Helpers.create_logger(cwd, logfile)
+    formatter, file_handler, logger = Helpers.create_logger(cwd, logfile_name)
 
     # process input flags
     if args.debug:
@@ -502,11 +489,6 @@ def dual_re_upgrade_upgrader():
             logger.error(error)
 
     logger.info('********** COMPARING PRE & POST CONFIG **********')
-
-    print(repr(pre_upgrade_config))
-    print("###########")
-    print(repr(post_upgrade_config))
-
 
     rpc_processor_re0.compare_configs(pre_upgrade_config, post_upgrade_config)
 

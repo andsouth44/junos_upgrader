@@ -1,0 +1,8 @@
+{
+  "RE0_HOST": "10.10.10.11",
+  "RE1_HOST": "10.10.10.12",
+  "USERNAME": "username",
+  "PASSWORD": "password",
+  "ACTIVE_JUNOS": "19.4R3-S4.1",
+  "NEW_JUNOS": "22.4R3.25"
+}

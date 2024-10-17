@@ -5,7 +5,7 @@ setup(
     version="1.0.0",
     author="Andrew Southard",
     author_email="andsouth44@gmail.com",
-    description="A application to upgrade JunOS",
+    description="An application to upgrade JunOS",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
     url="https://github.com/andsouth44/junos_upgrader",

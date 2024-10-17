@@ -1,50 +1,36 @@
-## junos_upgrader
+# junos_upgrader
 
-### Description
+## Description
 
-junos_upgrader is:
-
-* An application for upgrading the JunOS operating system on Juniper routers and switches
-* A framework, designed to be modular and extensible, to enable users to easily develop their own upgrade code
-* Extends the Juniper PyEZ Python library 
+junos_upgrader is a modular and extensible application/framework for upgrading the JunOS operating system on Juniper routers and switches
 
 junos_upgrader has 3 main parts:
 
-* RPC Caller module - a repository of methods, based on cli commands, that call the equivalent PyEz RPCs.
-* RPC Processor module - a repository of methods that call methods from the RPC Caller module and process the RPC call responses as required.
-* Upgraders - a set of upgraders for different purposes, e.g. dual RE device processor, single RE device processor etc. Each upgrader runs a series of RPC Processor methods to achieve the required upgrade steps for the device being upgraded.
+* rpc_caller module - a module containing a set of methods that run RPCs on the device. Each methods' name is based on the equivalent CLI command.
+* rpc_processor module - a module containing a set of methods that call methods from the `rpc_caller` module and process the RPC call responses as required.
+* upgraders - a folder containing a set of "upgraders" for different use cases. Initially, `junos_upgrader` has one `upgrader` (an upgrader for dual RE MX devices) but further `upgraders` will be added or contributed. Each `upgrader` calls a set of methods from the `rpc_processor` module to carry out the steps appropriate for the device being upgraded.
 
-### How to use junos_upgrader
+rpc_processor methods are formed by calling one or more methods from rpc_caller.
+upgraders are formed by calling one or more methods from rpc_procesor.
 
-* Clone the repo
-* Pick an existing Upgrader module that matches your requirements or develop a new Upgrader
-* Populate the input files as appropriate
-* Run the upgrader from CLI - "python3 upgrader_name"
+# Prerequisites
+A server or VM running Python>=3.6 with NETCONF connectivity to the device(s) being upgraded.
 
-Each upgrader should include the following flags:
+## How to Use
+Please see the README file for each upgrader
 
-* --dryrun or -d   - runs the upgrader pre-checks only
-* --force or -f    - runs the full upgrader despite any errors in the prechecks
-* --debug or -g    - runs the upgrader with added debug output - for development only
+## How to Develop your own Upgrader
+* Create a new folder and file structure inside the `upgraders` folder by copying, re-naming and pasting the `upgrader_template` folder.
+* Rename the upgrader_template file to `your_use_case_upgrader.py`.
+* Add the method calls required for your use case to `your_use_case_upgrader.py`. Use the methods available in `rpc_processor.py` OR add your own new methods to `rpc_processor.py` if the appropriate methods are not available.
+* If you have to add new methods to `rpc_processor.py`, those new methods can use methods available in `rpc_caller.py` OR you can add your own new methods to `rpc_caller.py` if the appropriate methods are not available.
+* Add a test module with tests to the `tests` folder
 
-### Contributing
+## Contributing
 
-Contributors can add functionality to the application: 
-* RPC calls can be added to the RPC Caller module.
-* RPC response processors can be added to the RPC Processor module.
-* If a new Upgrader is required it can be added to the 'upgraders' folder.
-* Additions must closely follow the structure and style of existing code.
+To contribute, please follow https://docs.github.com/en/get-started/exploring-projects-on-github/contributing-to-a-project
 
-To contribute, please follow normal Git work flow best practices, i.e. fork the repo, create your own dev branch, add you code, commit, issue a pull request
-
-### Tests
-
-All code should have appropriate unit tests in the 'tests' folder.
-
-### Prerequisites
-* See requirements.txt
-
-### Author and License
+## Author and License
 
 andsouth44@gmail.com
 
