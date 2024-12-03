@@ -794,11 +794,11 @@ class RpcProcessor:
                      f' that you are trying to apply to the device. Please check the syntax of the'
                      f' commands. Exception: {e}')
             self.logger.error(error)
-            raise JunosConfigApplyError
+            raise JunosConfigApplyError(error)
         except Exception as e:
             error = f'\u274C ERROR: Unable to load config. Exception: {e}'
             self.logger.error(error)
-            raise JunosConfigApplyError
+            raise JunosConfigApplyError(error)
 
     def create_rescue_config(self, mode: str):
         self.logger.info('Creating rescue config')
@@ -809,7 +809,7 @@ class RpcProcessor:
         except Exception as e:
             error = f'\u274C ERROR: Unable to create rescue config. Exception: {e}'
             self.logger.error(error)
-            raise JunosConfigRescueError
+            raise JunosConfigRescueError(error)
 
     def install_junos_on_device(self, junos_package_path: str, new_junos_package: str, re_number: int):
         self.logger.debug(f'Inputs are - junos_package_path: {junos_package_path}, new_junos_package: {new_junos_package}, re_number: {re_number}')
@@ -838,7 +838,7 @@ class RpcProcessor:
         except Exception as e:
             error = f'\u274C ERROR: Unable to install Junos. Exception: {e}'
             self.logger.error(error)
-            raise JunosPackageInstallError
+            raise JunosPackageInstallError(error)
 
     def reboot_re(self, re_number: int):
         self.logger.info(f'Initiating reboot of RE{re_number}.')
@@ -848,7 +848,7 @@ class RpcProcessor:
         except Exception as e:
             error = f'\u274C ERROR: Unable to initiate reboot of RE{str(re_number)}. Exception: {e}'
             self.logger.error(error)
-            raise JunosRebootError
+            raise JunosRebootError(error)
 
     def validate_junos_on_device(self, path: str, package: str):
         self.logger.info(f'Validating {package}. This may take several minutes.')
@@ -869,7 +869,7 @@ class RpcProcessor:
         except Exception as e:
             error = f'\u26A0\uFE0F WARNING: Unable to validate. Exception: {e}'
             self.logger.error(error)
-            raise JunosValidationError
+            raise JunosValidationError(error)
 
     def check_matching_junos_on_partitions(self, image: str):
         self.logger.info(f'Checking that image: {image} exists on both partitions')
@@ -901,7 +901,7 @@ class RpcProcessor:
             error = f"\u274C ERROR: Unable to initiate RE switchover. Exception: {e}"
             self.logger.error(error)
             self.upgrade_error_log.append(error)
-            raise JunosReSwitchoverError
+            raise JunosReSwitchoverError(error)
 
     def request_vmhost_snapshot(self):
         self.logger.info('Creating vmhost snapshot. This may take several minutes:')
