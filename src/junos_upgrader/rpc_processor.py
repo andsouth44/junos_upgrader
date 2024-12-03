@@ -412,8 +412,34 @@ class RpcProcessor:
                     self.logger.error(error)
                     self.upgrade_error_log.append(error)
                     return False
+            else:
+                self.logger.info("ISIS is not running")
         except Exception as e:
             error = f'\u274C ERROR: Unable to verify number of ISIS adjacencies. Exception: {e}'
+            self.logger.error(error)
+            self.upgrade_error_log.append(error)
+
+    def verify_number_of_full_ospf_neighbors(self, min_ospf_neighbors: int, slot: int):
+        self.logger.info("Verify number of 'Full' OSPF neighbors")
+        try:
+            adjacency_count = 0
+            ospf_info = self.dev.show_ospf_neighbor()
+            if ospf_info.findall('ospf-neighbor') is not None:
+                for neighbor in ospf_info.findall('ospf-neighbor'):
+                    if neighbor.find('ospf-neighbor-state').text == 'Full':
+                        adjacency_count += 1
+                if adjacency_count >= min_ospf_neighbors:
+                    self.logger.info(f"RE{str(slot)} has {adjacency_count} OSPF 'Full' adjacencies. \u2705")
+                    return True
+                else:
+                    error = f"\u274C ERROR: RE has insufficient OSPF 'Full' neighbors. Expecting >= {min_ospf_neighbors}, but has {adjacency_count}"
+                    self.logger.error(error)
+                    self.upgrade_error_log.append(error)
+                    return False
+            else:
+                self.logger.info("OSPF is not running")
+        except Exception as e:
+            error = f'\u274C ERROR: Unable to verify number of OSPF neighbors. Exception: {e}'
             self.logger.error(error)
             self.upgrade_error_log.append(error)
 
@@ -430,8 +456,32 @@ class RpcProcessor:
                     isis_list.append({'interface': interface, 'level': level, 'state': state})
                 record['isis-adjacency-info'] = isis_list
                 self.logger.info('ISIS adjacency info recorded. \u2705')
+            else:
+                self.logger.info("ISIS is not running")
+                record['isis-adjacency-info'] = "ISIS is not running"
         except Exception as e:
             error = f'\u274C ERROR: Unable to save ISIS adjacency info to capture file. Exception: {e}'
+            self.logger.error(error)
+            self.upgrade_error_log.append(error)
+
+    def record_ospf_neighbor_info(self, record: dict):
+        self.logger.info('Recording OSPF neighbor info')
+        try:
+            ospf_list = []
+            ospf_neighbor_info = self.dev.show_ospf_neighbor(detail=True)
+            if ospf_neighbor_info.findall('ospf-neighbor') is not None:
+                for ospf_nei in ospf_neighbor_info.findall('ospf-neighbor'):
+                    interface = ospf_nei.find('interface-name').text
+                    area = ospf_nei.find('ospf-area').text
+                    state = ospf_nei.find('adjacency-state').text
+                    ospf_list.append({'interface': interface, 'area': area, 'state': state})
+                record['ospf-neighbor-info'] = ospf_list
+                self.logger.info('OSPF neighbor info recorded. \u2705')
+            else:
+                self.logger.info("OSPF is not running")
+                record['ospf-neighbor-info'] = "OSPF is not running"
+        except Exception as e:
+            error = f'\u274C ERROR: Unable to save OSPF neighbor info to capture file. Exception: {e}'
             self.logger.error(error)
             self.upgrade_error_log.append(error)
 
@@ -445,8 +495,8 @@ class RpcProcessor:
                     address = peer.find('peer-address').text
                     state = peer.find('peer-state').text
                     peer_list.append({'address': address, 'state': state})
-            record['bgp-summary'] = peer_list
-            self.logger.info('BGP summary info recorded. \u2705')
+                record['bgp-summary'] = peer_list
+                self.logger.info('BGP summary info recorded. \u2705')
         except Exception as e:
             error = f'\u274C ERROR: Unable to record BGP summary info. Exception: {e}'
             self.logger.error(error)

@@ -1,0 +1,9 @@
+{
+  "RE0_HOST": "172.16.18.109",
+  "RE1_HOST": "172.16.18.110",
+  "USERNAME": "username",
+  "PASSWORD": "password",
+  "ACTIVE_JUNOS": "19.4R3-S4.1",
+  "NEW_JUNOS": "22.4R3.25"
+}
+
