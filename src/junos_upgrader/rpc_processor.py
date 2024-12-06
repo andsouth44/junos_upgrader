@@ -436,8 +436,6 @@ class RpcProcessor:
                     self.logger.error(error)
                     self.upgrade_error_log.append(error)
                     return False
-            else:
-                self.logger.info("OSPF is not running")
         except Exception as e:
             error = f'\u274C ERROR: Unable to verify number of OSPF neighbors. Exception: {e}'
             self.logger.error(error)
@@ -468,12 +466,12 @@ class RpcProcessor:
         self.logger.info('Recording OSPF neighbor info')
         try:
             ospf_list = []
-            ospf_neighbor_info = self.dev.show_ospf_neighbor(detail=True)
+            ospf_neighbor_info = self.dev.show_ospf_neighbor(verbosity_level="extensive")
             if ospf_neighbor_info.findall('ospf-neighbor') is not None:
                 for ospf_nei in ospf_neighbor_info.findall('ospf-neighbor'):
                     interface = ospf_nei.find('interface-name').text
                     area = ospf_nei.find('ospf-area').text
-                    state = ospf_nei.find('adjacency-state').text
+                    state = ospf_nei.find('ospf-neighbor-state').text
                     ospf_list.append({'interface': interface, 'area': area, 'state': state})
                 record['ospf-neighbor-info'] = ospf_list
                 self.logger.info('OSPF neighbor info recorded. \u2705')

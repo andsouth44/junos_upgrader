@@ -37,6 +37,7 @@ def single_re_upgrade_upgrader():
     config_file_to_backup: str = inputs_json.get("CONFIG_FILE_TO_BACKUP")
     re_model: str = inputs_json.get("RE_MODEL")
     min_isis_adj: int = inputs_json.get("MIN_ISIS_ADJ")
+    min_ospf_nei: int = inputs_json.get("MIN_OSPF_NEI")
     max_mem_utilization: int = inputs_json.get("MAX_MEM_UTILIZATION_PERCENT")
     min_cpu_idle: int = inputs_json.get("MIN_CPU_IDLE_PERCENT")
     post_reboot_delay: int = inputs_json.get("POST_REBOOT_DELAY")
@@ -185,6 +186,9 @@ def single_re_upgrade_upgrader():
     # verify minimum number of 'Up' ISIS adjacencies
     rpc_processor.verify_number_of_up_isis_adjacencies(min_isis_adjacencies=min_isis_adj, slot=0)
 
+    # verify minimum number of 'Full' OSPF neighbors
+    rpc_processor.verify_number_of_full_ospf_neighbors(min_ospf_neighbors=min_ospf_nei, slot=0)
+
     # backup config files
     rpc_processor.copy_file_on_device(f're0:/config/{config_file_to_backup}', 're0:/var/tmp/PreUpgrade.conf.gz')
     rpc_processor.copy_file_on_device(f're1:/config/{config_file_to_backup}', 're1:/var/tmp/PreUpgrade.conf.gz')
@@ -197,6 +201,9 @@ def single_re_upgrade_upgrader():
 
     # record isis adjacencies
     rpc_processor.record_isis_adjacency_info(pre_upgrade_record)
+
+    # record ospf neighbors
+    rpc_processor.record_ospf_neighbor_info(pre_upgrade_record)
 
     # record bgp summary
     rpc_processor.record_bgp_summary_info(pre_upgrade_record)
@@ -310,6 +317,9 @@ def single_re_upgrade_upgrader():
     # verify minimum number of 'Up' ISIS adjacencies
     rpc_processor.verify_number_of_up_isis_adjacencies(min_isis_adjacencies=min_isis_adj, slot=0)
 
+    # verify minimum number of 'Full' OSPF neighbors
+    rpc_processor.verify_number_of_full_ospf_neighbors(min_ospf_neighbors=min_ospf_nei, slot=0)
+
     # record chassis hardware
     rpc_processor.record_chassis_hardware(post_upgrade_record)
 
@@ -318,6 +328,9 @@ def single_re_upgrade_upgrader():
 
     # record isis adjacencies
     rpc_processor.record_isis_adjacency_info(post_upgrade_record)
+
+    # record ospf neighbors
+    rpc_processor.record_ospf_neighbor_info(pre_upgrade_record)
 
     # record bgp neighbors
     rpc_processor.record_bgp_summary_info(post_upgrade_record)

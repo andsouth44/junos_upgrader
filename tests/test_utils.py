@@ -335,6 +335,8 @@ class TestUtils:
             return TestUtils.return_none()
         elif args[1].tag == 'get-isis-adjacency-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_isis_adjacency_information.xml')
+        elif args[1].tag == 'get-ospf-neighbor-information':
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_ospf_neighbor_information.xml')
         elif (args[1].tag == 'get-chassis-inventory'
               and calling_test_name == 'test_given_upgrade_fail_when_unable_to_record_chassis_inventory_then_raise_sysexit_and_record_chassis_inventory_error'):
             return TestUtils.return_none()
