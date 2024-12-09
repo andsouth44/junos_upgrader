@@ -6,7 +6,7 @@ class JunosUpgradeError(Exception):
 
 class JunosPackageInstallError(JunosUpgradeError):
     """
-    Parent class for all Junos install related exceptions
+    Custom error class for all Junos install related exceptions
     """
     def __init__(self, error_message: str):
         super().__init__(error_message)
@@ -14,7 +14,7 @@ class JunosPackageInstallError(JunosUpgradeError):
 
 class JunosConfigApplyError(JunosUpgradeError):
     """
-    Parent class for all config apply related exceptions
+    Custom error class for all config apply related exceptions
     """
     def __init__(self, error_message: str):
         super().__init__(error_message)
@@ -22,7 +22,7 @@ class JunosConfigApplyError(JunosUpgradeError):
 
 class JunosConfigRescueError(JunosUpgradeError):
     """
-    Parent class for all rescue config related exceptions
+    Custom error class for all rescue config related exceptions
     """
     def __init__(self, error_message: str):
         super().__init__(error_message)
@@ -30,7 +30,7 @@ class JunosConfigRescueError(JunosUpgradeError):
 
 class JunosRebootError(JunosUpgradeError):
     """
-    Parent class for all reboot related exceptions
+    Custom error class for all reboot related exceptions
     """
     def __init__(self, error_message: str):
         super().__init__(error_message)
@@ -38,7 +38,7 @@ class JunosRebootError(JunosUpgradeError):
 
 class JunosValidationError(JunosUpgradeError):
     """
-    Parent class for all junos validation related exceptions
+    Custom error class for all junos validation related exceptions
     """
     def __init__(self, error_message: str):
         super().__init__(error_message)
@@ -46,7 +46,7 @@ class JunosValidationError(JunosUpgradeError):
 
 class JunosConfigValidationError(JunosUpgradeError):
     """
-    Parent class for all validation related exceptions
+    Custom error class for all validation related exceptions
     """
     def __init__(self, error_message: str):
         super().__init__(error_message)
@@ -54,7 +54,7 @@ class JunosConfigValidationError(JunosUpgradeError):
 
 class JunosReSwitchoverError(JunosUpgradeError):
     """
-    Parent class for all RE switchover related exceptions
+    Custom error class for all RE switchover related exceptions
     """
     def __init__(self, error_message: str):
         super().__init__(error_message)
@@ -62,7 +62,7 @@ class JunosReSwitchoverError(JunosUpgradeError):
 
 class JunosRpcProcessorInitError(JunosUpgradeError):
     """
-    Parent class for all Rpc Processor Initialization exceptions
+    Custom error class for all Rpc Processor Initialization exceptions
     """
     def __init__(self, error_message: str):
         super().__init__(error_message)
@@ -70,14 +70,15 @@ class JunosRpcProcessorInitError(JunosUpgradeError):
 
 class JunosConnectError(JunosUpgradeError):
     """
-    Parent class for all device connection exceptions
+    Custom error class for all device connection exceptions
     """
     def __init__(self, error_message: str):
         super().__init__(error_message)
 
+
 class JunosInputsError(JunosUpgradeError):
     """
-    Parent class for all inputs exceptions
+    Custom error class for all inputs exceptions
     """
     def __init__(self, error_message: str):
         super().__init__(error_message)

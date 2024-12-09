@@ -301,6 +301,11 @@ def dual_re_upgrade_upgrader():
 
         for error in upgrade_error_log:
             logger.error(error)
+        #
+        # # write error log to log file
+        # with open('logs/upgrade.log', 'w') as file:
+        #     for error in upgrade_error_log:
+        #         file.write(error)
 
         rpc_processor_re0.dev.close()
         rpc_processor_re1.dev.close()
@@ -443,7 +448,7 @@ def dual_re_upgrade_upgrader():
     rpc_processor_re0.record_isis_adjacency_info(post_upgrade_record)
 
     # record ospf neighbors
-    rpc_processor_re0.record_ospf_neighbor_info(pre_upgrade_record)
+    rpc_processor_re0.record_ospf_neighbor_info(post_upgrade_record)
 
     # record bgp neighbors
     rpc_processor_re0.record_bgp_summary_info(post_upgrade_record)
@@ -500,6 +505,10 @@ def dual_re_upgrade_upgrader():
 
         for error in upgrade_error_log:
             logger.error(error)
+
+    # write post upgrade config to log file
+    with open('logs/post_upgrade_config.txt', 'w') as file:
+        file.write(post_upgrade_config)
 
     logger.info('********** COMPARING PRE & POST CONFIG **********')
 

@@ -75,7 +75,7 @@ class RpcProcessor:
                     description = module.find('description').text
                     chassis_module_list.append({'name': module_name, 'description': description})
                 record['chassis_hardware'] = chassis_module_list
-            self.logger.info('Chassis hardware recorded. \u2705')
+                self.logger.info('Chassis hardware recorded. \u2705')
         except Exception as e:
             error = f'\u274C ERROR: Unable to record chassis hardware. Exception: {e}'
             self.logger.error(error)
@@ -87,7 +87,7 @@ class RpcProcessor:
             alarm_list = []
             chass_alms = self.dev.show_chassis_alarms({})
             if chass_alms.find('alarm-summary/no-active-alarms') is not None:
-                self.logger.info('No Major alarms on chassis. \u2705')
+                self.logger.info('No alarms on chassis. \u2705')
                 return True
             alarms = chass_alms.findall('alarm-detail')
             for alarm in alarms:
@@ -412,8 +412,6 @@ class RpcProcessor:
                     self.logger.error(error)
                     self.upgrade_error_log.append(error)
                     return False
-            else:
-                self.logger.info("ISIS is not running")
         except Exception as e:
             error = f'\u274C ERROR: Unable to verify number of ISIS adjacencies. Exception: {e}'
             self.logger.error(error)
@@ -446,7 +444,10 @@ class RpcProcessor:
         try:
             isis_list = []
             isis_adj_info = self.dev.show_isis_adjacency(detail=True)
-            if isis_adj_info.findall('isis-adjacency') is not None:
+            if isis_adj_info is not None and "ISIS instance is not running" in etree.tostring(isis_adj_info, pretty_print=True, encoding='unicode'):
+                record['isis-adjacency-info'] = "ISIS is not running"
+                return
+            elif isis_adj_info is not None and isis_adj_info.findall('isis-adjacency') is not None:
                 for isis_adj in isis_adj_info.findall('isis-adjacency'):
                     interface = isis_adj.find('interface-name').text
                     level = isis_adj.find('level').text
@@ -454,9 +455,6 @@ class RpcProcessor:
                     isis_list.append({'interface': interface, 'level': level, 'state': state})
                 record['isis-adjacency-info'] = isis_list
                 self.logger.info('ISIS adjacency info recorded. \u2705')
-            else:
-                self.logger.info("ISIS is not running")
-                record['isis-adjacency-info'] = "ISIS is not running"
         except Exception as e:
             error = f'\u274C ERROR: Unable to save ISIS adjacency info to capture file. Exception: {e}'
             self.logger.error(error)
@@ -467,7 +465,10 @@ class RpcProcessor:
         try:
             ospf_list = []
             ospf_neighbor_info = self.dev.show_ospf_neighbor(verbosity_level="extensive")
-            if ospf_neighbor_info.findall('ospf-neighbor') is not None:
+            if ospf_neighbor_info is not None and "OSPF instance is not running" in etree.tostring(ospf_neighbor_info, pretty_print=True, encoding='unicode'):
+                record['ospf-neighbor-info'] = "OSPF is not running"
+                return
+            if ospf_neighbor_info is not None and ospf_neighbor_info.findall('ospf-neighbor') is not None:
                 for ospf_nei in ospf_neighbor_info.findall('ospf-neighbor'):
                     interface = ospf_nei.find('interface-name').text
                     area = ospf_nei.find('ospf-area').text
@@ -475,9 +476,6 @@ class RpcProcessor:
                     ospf_list.append({'interface': interface, 'area': area, 'state': state})
                 record['ospf-neighbor-info'] = ospf_list
                 self.logger.info('OSPF neighbor info recorded. \u2705')
-            else:
-                self.logger.info("OSPF is not running")
-                record['ospf-neighbor-info'] = "OSPF is not running"
         except Exception as e:
             error = f'\u274C ERROR: Unable to save OSPF neighbor info to capture file. Exception: {e}'
             self.logger.error(error)

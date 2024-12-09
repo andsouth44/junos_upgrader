@@ -2,7 +2,7 @@
 "PORT": "22",
 "POST_REBOOT_DELAY": 360,
 "POST_SWITCHOVER_DELAY": 180,
-"LOGFILE": "upgrade.log",
+"LOGFILE_NAME": "upgrade.log",
 "CONFIG_FILE_TO_BACKUP": "juniper.conf.1.gz",
 "RE_MODEL": "RE-S-1600x8",
 "MIN_ISIS_ADJ": 2,

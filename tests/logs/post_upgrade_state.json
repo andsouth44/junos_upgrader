@@ -74,6 +74,18 @@
             "state": "Up"
         }
     ],
+    "ospf-neighbor-info": [
+        {
+            "interface": "xe-0/3/1.50",
+            "area": "0.0.0.0",
+            "state": "Full"
+        },
+        {
+            "interface": "xe-0/3/1.51",
+            "area": "0.0.0.0",
+            "state": "Full"
+        }
+    ],
     "bgp-summary": [
         {
             "address": "11.11.11.11",

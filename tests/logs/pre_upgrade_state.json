@@ -57,11 +57,6 @@
             "description": "JNP FAN 3RU"
         }
     ],
-    "subscriber-count-per-type": {
-        "vlan": 10,
-        "pppoe": 5,
-        "dhcp": 10
-    },
     "isis-adjacency-info": [
         {
             "interface": "ae17.100",
@@ -72,6 +67,18 @@
             "interface": "ae27.100",
             "level": "1",
             "state": "Up"
+        }
+    ],
+    "ospf-neighbor-info": [
+        {
+            "interface": "xe-0/3/1.50",
+            "area": "0.0.0.0",
+            "state": "Full"
+        },
+        {
+            "interface": "xe-0/3/1.51",
+            "area": "0.0.0.0",
+            "state": "Full"
         }
     ],
     "bgp-summary": [

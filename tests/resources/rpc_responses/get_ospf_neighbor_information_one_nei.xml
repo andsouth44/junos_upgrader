@@ -1,0 +1,25 @@
+<ospf-neighbor-information>
+    <ospf-neighbor>
+        <neighbor-address>172.19.48.165</neighbor-address>
+        <interface-name>xe-0/3/1.50</interface-name>
+        <ospf-neighbor-state>Full</ospf-neighbor-state>
+        <neighbor-id>66.59.146.166</neighbor-id>
+        <neighbor-priority>128</neighbor-priority>
+        <activity-timer>31</activity-timer>
+        <ospf-area>0.0.0.0</ospf-area>
+        <options>0x52</options>
+        <dr-address>0.0.0.0</dr-address>
+        <bdr-address>0.0.0.0</bdr-address>
+        <neighbor-up-time seconds="1363226">
+            2w1d 18:40:26
+        </neighbor-up-time>
+        <neighbor-adjacency-time seconds="1363226">
+            2w1d 18:40:26
+        </neighbor-adjacency-time>
+        <ospf-neighbor-topology>
+            <ospf-topology-name>default</ospf-topology-name>
+            <ospf-topology-id>0</ospf-topology-id>
+            <ospf-neighbor-topology-state>Bidirectional</ospf-neighbor-topology-state>
+        </ospf-neighbor-topology>
+    </ospf-neighbor>
+</ospf-neighbor-information>

@@ -36,7 +36,6 @@ class TestUpgradeProcessor:
         monkeypatch.setattr(RpcProcessor, "countdown_timer", TestUtils.do_nothing)
 
     def test_given_successful_upgrade_when_run_then_return_success_messages(self, monkeypatch, caplog):
-
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
         messages = ["There are no differences between the pre and post configs. ✅",
@@ -82,7 +81,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_chassis_alarm_then_raise_sysexit_and_chassis_alarm_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: The following alarms exist on the chassis:")
+        message = "❌ ERROR: The following alarms exist on the chassis:"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -91,7 +90,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_verify_mastership_fail_then_raise_sysexit_and_re_mastership_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: RE0 is not master")
+        message = "❌ ERROR: RE0 is not master"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -100,7 +99,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_re_status_bad_then_raise_sysexit_and_re_status_fail_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: RE0 has status of: Bad, expecting status=OK")
+        message = "❌ ERROR: RE0 has status of: Bad, expecting status=OK"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -109,7 +108,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_re_mem_util_high_then_raise_sysexit_and_re_mem_fail_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: RE0 memory utilization is 80%. Expecting <= 50%")
+        message = "❌ ERROR: RE0 memory utilization is 80%. Expecting <= 50%"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -118,7 +117,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_re_cpu_util_high_then_raise_sysexit_and_re_cpu_fail_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: RE0 CPU idle percentage is 15%. Expecting >= 40%")
+        message = "❌ ERROR: RE0 CPU idle percentage is 15%. Expecting >= 40%"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -127,7 +126,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_replication_not_complete_then_raise_sysexit_and_replication_not_complete_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: Replication state is not complete for IS-IS")
+        message = "❌ ERROR: Replication state is not complete for IS-IS"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -136,7 +135,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_pic_status_fail_then_raise_sysexit_and_pic_status_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: All PICs should be Online. PIC in slot 0 is Offline")
+        message = "❌ ERROR: All PICs should be Online. PIC in slot 0 is Offline"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -145,7 +144,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_active_sw_ver_incorrect_then_raise_sysexit_and_sw_ver_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: RE0 is not running the expected Junos version. RE0 is running 22.4R3.25, expecting 19.4R3-S4.1")
+        message = "❌ ERROR: RE0 is not running the expected Junos version. RE0 is running 22.4R3.25, expecting 19.4R3-S4.1"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -154,7 +153,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_incorrect_re_model_then_raise_sysexit_and_re_model_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: RE1 is not the expected model version. RE1 is RE-S-1700x8")
+        message = "❌ ERROR: RE1 is not the expected model version. RE1 is RE-S-1700x8"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -164,7 +163,7 @@ class TestUpgradeProcessor:
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
         monkeypatch.setattr(fs.FS, "ls", TestUtils.get_re_files_no_new_package)
-        message = ("❌ ERROR: RE1 does not have the new Junos package junos-vmhost-install-mx-x86-64-22.4R3.25.tgz in /var/tmp/")
+        message = "❌ ERROR: RE1 does not have the new Junos package junos-vmhost-install-mx-x86-64-22.4R3.25.tgz in /var/tmp/"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -173,7 +172,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_incorrect_number_of_disks_on_re_then_raise_sysexit_and_number_of_disks_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: RE0 does not have correct number of disks. RE0 has 1, expecting 2")
+        message = "❌ ERROR: RE0 does not have correct number of disks. RE0 has 1, expecting 2"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -182,7 +181,16 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_incorrect_number_of_isis_adjacencies_then_raise_sysexit_and_number_of_isis_adjacencies_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: RE has insufficient ISIS \'Up\' adjacencies. Expecting >= 2, but has 1")
+        message = "❌ ERROR: RE has insufficient ISIS 'Up' adjacencies. Expecting >= 2, but has 1"
+        with pytest.raises(SystemExit):
+            dual_re_upgrade_upgrader()
+        assert message in caplog.text
+        TestUtils.mocker_resetter()
+
+    def test_given_upgrade_fail_when_incorrect_number_of_ospf_neighbors_then_raise_sysexit_and_number_of_ospf_neighbors_error(self, monkeypatch, caplog):
+        monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
+        monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
+        message = "❌ ERROR: RE has insufficient OSPF 'Full' neighbors. Expecting >= 2, but has 1"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -192,7 +200,7 @@ class TestUpgradeProcessor:
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
         monkeypatch.setattr(fs.FS, "cp", TestUtils.return_fail)
-        message = ("❌ ERROR: Copy failed from re0:/config/juniper.conf.1.gz to re0:/var/tmp/PreUpgrade.conf.gz.")
+        message = "❌ ERROR: Copy failed from re0:/config/juniper.conf.1.gz to re0:/var/tmp/PreUpgrade.conf.gz."
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -201,7 +209,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_unable_to_record_chassis_inventory_then_raise_sysexit_and_record_chassis_inventory_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: Unable to record chassis hardware. Exception: \'NoneType\' object has no attribute \'findall\'")
+        message = "❌ ERROR: Unable to record chassis hardware. Exception: 'NoneType' object has no attribute 'findall'"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -210,7 +218,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_unable_to_record_subscribers_then_raise_sysexit_and_get_subscribers_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: Unable to record subscriber count for each type. Exception: \'NoneType\' object has no attribute \'findall\'")
+        message = "❌ ERROR: Unable to record subscriber count for each type. Exception: 'NoneType' object has no attribute 'findall'"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -219,7 +227,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_unable_to_record_isis_adjacencies_then_raise_sysexit_and_get_isis_adjacencies_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: Unable to save ISIS adjacency info to capture file. Exception: 'NoneType' object has no attribute 'findall'")
+        message = "❌ ERROR: Unable to verify number of ISIS adjacencies. Exception: 'NoneType' object has no attribute 'findall'"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -228,7 +236,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_unable_to_record_bgp_summary_then_raise_sysexit_and_get_bgp_summary_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: Unable to record BGP summary info. Exception: 'NoneType' object has no attribute 'findall'")
+        message = "❌ ERROR: Unable to record BGP summary info. Exception: 'NoneType' object has no attribute 'findall'"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -237,7 +245,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_unable_to_record_interface_state_then_raise_sysexit_and_get_interface_state_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: Unable to record interface state info. Exception: 'NoneType' object has no attribute 'findall'")
+        message = "❌ ERROR: Unable to record interface state info. Exception: 'NoneType' object has no attribute 'findall'"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -246,7 +254,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_unable_to_record_ldp_session_info_then_raise_sysexit_and_get_ldp_session_info_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: Unable to save LDP session info. Exception: 'NoneType' object has no attribute 'findall'")
+        message = "❌ ERROR: Unable to save LDP session info. Exception: 'NoneType' object has no attribute 'findall'"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -255,7 +263,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_unable_to_record_replication_state_then_raise_sysexit_and_get_replication_state_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: Unable to verify replication state. Exception: 'NoneType' object has no attribute 'findall'")
+        message = "❌ ERROR: Unable to verify replication state. Exception: 'NoneType' object has no attribute 'findall'"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -264,7 +272,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_unable_to_record_bfd_session_info_then_raise_sysexit_and_get_bfd_session_info_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: Unable to record bfd session info. Exception: 'NoneType' object has no attribute 'find'")
+        message = "❌ ERROR: Unable to record bfd session info. Exception: 'NoneType' object has no attribute 'find'"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -273,7 +281,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_unable_to_record_pic_info_then_raise_sysexit_and_get_pic_info_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: Unable to verify PIC status. Exception: 'NoneType' object has no attribute 'findall'")
+        message = "❌ ERROR: Unable to verify PIC status. Exception: 'NoneType' object has no attribute 'findall'"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -282,7 +290,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_unable_to_record_chassis_alarms_then_raise_sysexit_and_get_chassis_alarms_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: Unable to verify alarms on chassis. Exception: 'bool' object has no attribute 'find'")
+        message = "❌ ERROR: Unable to verify alarms on chassis. Exception: 'bool' object has no attribute 'find'"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -291,7 +299,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_unable_to_record_l2ckt_info_then_raise_sysexit_and_get_l2ckt_info_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: Unable to record L2 circuit info. Exception: 'NoneType' object has no attribute 'findall'")
+        message = "❌ ERROR: Unable to record L2 circuit info. Exception: 'NoneType' object has no attribute 'findall'"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -300,7 +308,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_unable_to_record_route_summary_then_raise_sysexit_and_get_route_summary_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: Unable to record route summary. Exception: 'NoneType' object has no attribute 'findall'")
+        message = "❌ ERROR: Unable to record route summary. Exception: 'NoneType' object has no attribute 'findall'"
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -311,7 +319,7 @@ class TestUpgradeProcessor:
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
         monkeypatch.setattr(TestUtils.MockConfig, "load", TestUtils.raise_exception)
-        message = ("❌ ERROR: Unable to load config. Exception: test")
+        message = "❌ ERROR: Unable to load config. Exception: test"
         with pytest.raises(JunosConfigApplyError):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -321,7 +329,7 @@ class TestUpgradeProcessor:
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
         monkeypatch.setattr(TestUtils.MockConfig, "rescue", TestUtils.raise_exception)
-        message = ("❌ ERROR: Unable to create rescue config. Exception: test")
+        message = "❌ ERROR: Unable to create rescue config. Exception: test"
         with pytest.raises(JunosConfigRescueError):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -330,7 +338,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_unable_to_load_package_then_raise_junos_install_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: Unable to install Junos. Exception: test")
+        message = "❌ ERROR: Unable to install Junos. Exception: test"
         with pytest.raises(JunosPackageInstallError):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -339,7 +347,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_unable_to_reboot_then_raise_junos_package_reboot_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ("❌ ERROR: Unable to initiate reboot of RE1. Exception: test")
+        message = "❌ ERROR: Unable to initiate reboot of RE1. Exception: test"
         with pytest.raises(JunosRebootError):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -349,7 +357,7 @@ class TestUpgradeProcessor:
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
         monkeypatch.setattr(Device, 'open', TestUtils.do_nothing)
-        message = ("UpgradeUtils: Cannot connect to 10.10.10.11. Maximum number of retries has been reached")
+        message = "UpgradeUtils: Cannot connect to 10.10.10.11. Maximum number of retries has been reached"
         with pytest.raises(JunosRpcProcessorInitError):
             dual_re_upgrade_upgrader()
         assert message in caplog.text
@@ -358,7 +366,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_warning_when_junos_not_matching_on_partitions_then_warning_in_log(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ('❌ ERROR: Junos image: junos-install-mx-x86-64-22.4R3.25 does not exist on both partitions')
+        message = '❌ ERROR: Junos image: junos-install-mx-x86-64-22.4R3.25 does not exist on both partitions'
         dual_re_upgrade_upgrader()
         assert message in caplog.text
         TestUtils.mocker_resetter()
@@ -366,7 +374,7 @@ class TestUpgradeProcessor:
     def test_given_upgrade_fail_when_device_re_switchover_fail_then_raise_junos_re_switchover_error(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
-        message = ('❌ ERROR: RE switchover initiation failed')
+        message = '❌ ERROR: RE switchover initiation failed'
         dual_re_upgrade_upgrader()
         with pytest.raises(SystemExit):
             dual_re_upgrade_upgrader()

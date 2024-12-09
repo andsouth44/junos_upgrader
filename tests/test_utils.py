@@ -172,6 +172,11 @@ class TestUtils:
             mocker.reset()
 
     @staticmethod
+    def logger_resetter(logfile):
+        cwd = os.path.dirname(os.path.abspath(__file__))
+        os.remove(f'{cwd}/logs/{logfile}')
+
+    @staticmethod
     def create_mock_inputs_json():
         directory_path = Path(sys.path[0]).joinpath('inputs')
         combined_data = {}
@@ -335,6 +340,9 @@ class TestUtils:
             return TestUtils.return_none()
         elif args[1].tag == 'get-isis-adjacency-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_isis_adjacency_information.xml')
+        elif (args[1].tag == 'get-ospf-neighbor-information'
+              and calling_test_name == 'test_given_upgrade_fail_when_incorrect_number_of_ospf_neighbors_then_raise_sysexit_and_number_of_ospf_neighbors_error'):
+            return TestUtils.load_test_file_as_etree('rpc_responses/get_ospf_neighbor_information_one_nei.xml')
         elif args[1].tag == 'get-ospf-neighbor-information':
             return TestUtils.load_test_file_as_etree('rpc_responses/get_ospf_neighbor_information.xml')
         elif (args[1].tag == 'get-chassis-inventory'
