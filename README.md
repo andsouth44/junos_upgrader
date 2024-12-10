@@ -8,7 +8,7 @@ junos_upgrader has 3 main parts:
 
 * rpc_caller module - a module containing a set of methods that run RPCs on the device. Each methods' name is based on the equivalent CLI command.
 * rpc_processor module - a module containing a set of methods that call methods from the `rpc_caller` module and process the RPC call responses as required.
-* upgraders - a folder containing a set of "upgraders" for different use cases. Initially, `junos_upgrader` has one `upgrader` (an upgrader for dual RE MX devices) but further `upgraders` will be added or contributed. Each `upgrader` calls a set of methods from the `rpc_processor` module to carry out the steps appropriate for the device being upgraded.
+* upgraders - a folder containing a set of "upgraders" for different use cases. `junos_upgrader` currently has two `upgraders`; an upgrader for dual RE devices and an upgrader for single RE devices but further `upgraders` will be added or contributed. Each `upgrader` calls a set of methods from the `rpc_processor` module to carry out the steps appropriate for the device being upgraded.
 
 rpc_processor methods are formed by calling one or more methods from rpc_caller.
 upgraders are formed by calling one or more methods from rpc_procesor.
