@@ -464,9 +464,10 @@ class RpcProcessor:
         self.logger.info('Recording OSPF neighbor info')
         try:
             ospf_list = []
-            ospf_neighbor_info = self.dev.show_ospf_neighbor(verbosity_level="extensive")
+            ospf_neighbor_info = self.dev.show_ospf_neighbor(extensive=True)
             if ospf_neighbor_info is not None and "OSPF instance is not running" in etree.tostring(ospf_neighbor_info, pretty_print=True, encoding='unicode'):
                 record['ospf-neighbor-info'] = "OSPF is not running"
+                self.logger.info('OSPF neighbor info recorded. \u2705')
                 return
             if ospf_neighbor_info is not None and ospf_neighbor_info.findall('ospf-neighbor') is not None:
                 for ospf_nei in ospf_neighbor_info.findall('ospf-neighbor'):

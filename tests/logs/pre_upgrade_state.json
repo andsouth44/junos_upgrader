@@ -57,6 +57,11 @@
             "description": "JNP FAN 3RU"
         }
     ],
+    "subscriber-count-per-type": {
+        "vlan": 10,
+        "pppoe": 5,
+        "dhcp": 10
+    },
     "isis-adjacency-info": [
         {
             "interface": "ae17.100",
