@@ -17,7 +17,7 @@ upgraders are formed by calling one or more methods from rpc_procesor.
 A server or VM running Python>=3.6 with NETCONF connectivity to the device(s) being upgraded.
 
 ## How to Use
-Please see the README file for each upgrader
+Please see the README file for each upgrader. For example, for the Dual RE Upgrader, refer to the README at `src/junos_upgrader/upgraders/dual_re_upgrader/README.md`
 
 ## How to Develop your own Upgrader
 * Create a new folder and file structure inside the `upgraders` folder by copying, re-naming and pasting the `upgrader_template` folder.

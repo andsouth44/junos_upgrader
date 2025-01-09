@@ -8,19 +8,25 @@ In addition to repository prerequisites, this upgrader requires:
 # How to Use
 
 ## Clone the Repository
-Create a clone of the repo on your server or VM.
+Create a clone of the repo on your laptop, server or VM.
+
+`git clone https://github.com/andsouth44/junos_upgrader.git`
 
 ## Amend Input Parameters
 
 Amend the input files; TEST_PARAMS.json and USER_PARAMS.json in:
 
-`junos_upgrader/src/junos_upgrader/upgraders/dual_re_upgrader/inputs` for your environment.
+`junos_upgrader/src/junos_upgrader/upgraders/dual_re_upgrader/inputs`
+
+appropriate for your environment.
 
 ## Amend Redundancy Config Files
 
 Amend the config files; activate_redundancy.txt and deactivate_redundancy.txt in:
 
-`junos_upgrader/src/junos_upgrader/upgraders/dual_re_upgrader/inputs` for your environment.
+`junos_upgrader/src/junos_upgrader/upgraders/dual_re_upgrader/inputs`
+
+appropriate for your environment.
 
 These files are used to deactivate redundancy features before the upgrade starts,
 and re-activate the redundancy features when the upgrade has completed.
