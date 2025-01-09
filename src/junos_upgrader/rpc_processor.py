@@ -233,7 +233,7 @@ class RpcProcessor:
         self.logger.info(f'Verify minimum number of established BGP peers for each group in list {bgp_group_names}.')
         try:
             for group, min_peer in zip(bgp_group_names, min_peers_by_group):
-                summary = self.dev.show_bgp_summary_group_name(group)
+                summary = self.dev.show_bgp_summary_for_bgp_group_name(group)
                 if summary.findall('bgp-peer') is not None:
                     peers = summary.findall('bgp-peer')
                     peer_list = []

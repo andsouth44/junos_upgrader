@@ -63,8 +63,11 @@ class RpcCaller:
     def show_chassis_routing_engine(self, *args, **kwargs) -> etree.ElementTree:
         return self.device.rpc.get_route_engine_information(*args, **kwargs)
 
-    def show_bgp_summary_group_name(self, group_name) -> etree.ElementTree:
+    def show_bgp_summary_for_bgp_group_name(self, group_name) -> etree.ElementTree:
         return self.device.rpc.get_bgp_summary_information(group=group_name)
+
+    def show_bgp_summary(self) -> etree.ElementTree:
+        return self.device.rpc.get_bgp_summary_information()
 
     def show_task_replication(self, *args, **kwargs) -> etree.ElementTree:
         return self.device.rpc.get_routing_task_replication_state(*args, **kwargs)

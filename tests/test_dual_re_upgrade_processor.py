@@ -8,6 +8,7 @@ from jnpr.junos import Device
 from jnpr.junos.utils import fs
 import pytest
 import logging
+from memory_profiler import profile
 
 from upgraders.dual_re_upgrader.dual_re_upgrader import dual_re_upgrade_upgrader
 from helpers import Helpers
@@ -35,6 +36,7 @@ class TestUpgradeProcessor:
         monkeypatch.setattr(Config, "rescue", TestUtils.return_success)
         monkeypatch.setattr(RpcProcessor, "countdown_timer", TestUtils.do_nothing)
 
+    @profile
     def test_given_successful_upgrade_when_run_then_return_success_messages(self, monkeypatch, caplog):
         monkeypatch.setattr(Device, "execute", TestUtils.get_device_info)
         monkeypatch.setattr(logging.Logger, "addHandler", TestUtils.do_nothing)
